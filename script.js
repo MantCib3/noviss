@@ -175,6 +175,14 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
     });
 });
 
+// ===== data-link buttons (scroll to section) =====
+document.querySelectorAll('[data-link]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const target = document.querySelector(btn.getAttribute('data-link'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+});
+
 // ===== Legal Modals =====
 (function () {
     function openModal(id) {
