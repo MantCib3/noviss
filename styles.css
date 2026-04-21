@@ -1239,10 +1239,25 @@ a.nav-logo {
 
 /* ===== Responsive Design ===== */
 @media (max-width: 768px) {
+    /* Stack all two-column grids */
     .hero,
     .report-content,
-    .about-content {
+    .about-content,
+    .how-it-works-layout,
+    .about-blog-layout,
+    .contact-form-row {
         grid-template-columns: 1fr;
+    }
+
+    /* Hero: give report-text breathing room so it isn't cut off */
+    .hero {
+        padding-bottom: 3rem;
+        overflow: visible;
+    }
+
+    .report-text {
+        margin-top: 0;
+        padding-top: 0;
     }
 
     .hero-content h1 {
@@ -1253,8 +1268,18 @@ a.nav-logo {
         font-size: 1.4rem;
     }
 
+    /* Nav: hide centered menu, show hamburger */
     .nav-menu {
         display: none;
+        position: static;
+        transform: none;
+        left: auto;
+    }
+
+    .nav-menu.active {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 
     .hamburger {
@@ -1262,8 +1287,28 @@ a.nav-logo {
     }
 
     .nav-container {
-        flex-direction: column;
-        gap: 1rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    /* Pricing section: stack flipbook and process text */
+    .how-it-works-layout {
+        gap: 2rem;
+    }
+
+    /* Blog sidebar: stack below Our Approach */
+    .about-blog-layout {
+        gap: 2rem;
+    }
+
+    .about-blog-inset {
+        margin-top: 4rem;
+    }
+
+    /* Remove inset offset since stacked */
+    .about-blog-right {
+        margin-top: 0;
     }
 
     .services-grid,
