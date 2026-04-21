@@ -183,6 +183,15 @@ document.querySelectorAll('[data-link]').forEach(btn => {
     });
 });
 
+// ===== NOVISS logo scrolls to very top =====
+const navLogo = document.getElementById('navLogo');
+if (navLogo) {
+    navLogo.addEventListener('click', e => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
 // ===== Legal Modals =====
 (function () {
     function openModal(id) {
