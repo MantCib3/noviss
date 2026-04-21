@@ -175,6 +175,50 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
     });
 });
 
+// ===== Legal Modals =====
+(function () {
+    function openModal(id) {
+        const modal = document.getElementById(id);
+        if (!modal) return;
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+        const modal = document.getElementById(id);
+        if (!modal) return;
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // Trigger buttons/links
+    document.querySelectorAll('[data-modal]').forEach(el => {
+        el.addEventListener('click', e => {
+            e.preventDefault();
+            openModal(el.getAttribute('data-modal'));
+        });
+    });
+
+    // Close buttons inside modals
+    document.querySelectorAll('[data-close]').forEach(btn => {
+        btn.addEventListener('click', () => closeModal(btn.getAttribute('data-close')));
+    });
+
+    // Click outside inner box to close
+    document.querySelectorAll('.legal-modal').forEach(modal => {
+        modal.addEventListener('click', e => {
+            if (e.target === modal) closeModal(modal.id);
+        });
+    });
+
+    // Esc key closes any open modal
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.legal-modal.open').forEach(m => closeModal(m.id));
+        }
+    });
+})();
+
 // ===== Smooth Scrolling =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

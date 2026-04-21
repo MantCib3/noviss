@@ -281,8 +281,8 @@
                 <h3>Legal</h3>
                 <ul>
                     <li><a href="#disclaimers">Disclaimers</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#" data-modal="privacyModal">Privacy Policy</a></li>
+                    <li><a href="#" data-modal="termsModal">Terms &amp; Conditions</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -298,6 +298,97 @@
             <p>&copy; 2026 NOVISS OSINT. All rights reserved. Ethical Open Source Intelligence — Brisbane, Australia.</p>
         </div>
     </footer>
+
+    <!-- Privacy Policy Modal -->
+    <div class="legal-modal" id="privacyModal" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle">
+        <div class="legal-modal-inner">
+            <button class="legal-modal-close" data-close="privacyModal" aria-label="Close">&times;</button>
+            <h2 id="privacyModalTitle">Privacy Policy</h2>
+            <p class="legal-meta">Last updated: April 2026 &mdash; NOVISS OSINT, Brisbane, Queensland, Australia</p>
+
+            <h3>1. Overview</h3>
+            <p>NOVISS OSINT ("we", "us", "our") is committed to protecting the privacy of individuals who engage our services or visit this website. This policy explains what personal information we collect, how we use it, and your rights under the <em>Privacy Act 1988</em> (Cth) and the Australian Privacy Principles (APPs).</p>
+
+            <h3>2. Information We Collect</h3>
+            <p>We may collect the following personal information when you contact us or engage our services:</p>
+            <ul>
+                <li>Your name and contact details (email address)</li>
+                <li>Information you provide in your enquiry or investigation brief</li>
+                <li>Payment information (processed by third-party providers — we do not store card details)</li>
+                <li>Any files or images you voluntarily submit</li>
+            </ul>
+            <p>We do not collect sensitive personal information unless you explicitly provide it as part of your investigation brief.</p>
+
+            <h3>3. How We Use Your Information</h3>
+            <p>Personal information is used solely to:</p>
+            <ul>
+                <li>Assess and fulfil your investigation request</li>
+                <li>Communicate with you about your matter</li>
+                <li>Process payment for services rendered</li>
+                <li>Comply with legal obligations</li>
+            </ul>
+            <p>We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+
+            <h3>4. Information Security</h3>
+            <p>We take reasonable steps to protect personal information from misuse, interference, loss, and unauthorised access. All reports and client communications are handled confidentially. Files are deleted upon completion of an engagement unless retention is required by law.</p>
+
+            <h3>5. Third-Party Processors</h3>
+            <p>Payment processing is handled by Stripe and/or PayPal. These providers operate under their own privacy policies and are PCI-DSS compliant. We do not receive or store your full payment credentials.</p>
+
+            <h3>6. Access and Correction</h3>
+            <p>You have the right to request access to personal information we hold about you and to request corrections if that information is inaccurate. To make a request, contact us via the enquiry form on this website.</p>
+
+            <h3>7. Complaints</h3>
+            <p>If you believe your privacy rights have been breached, you may contact the Office of the Australian Information Commissioner (OAIC) at <em>oaic.gov.au</em>.</p>
+
+            <h3>8. Changes to This Policy</h3>
+            <p>We may update this policy from time to time. The current version will always be available on this website.</p>
+        </div>
+    </div>
+
+    <!-- Terms & Conditions Modal -->
+    <div class="legal-modal" id="termsModal" role="dialog" aria-modal="true" aria-labelledby="termsModalTitle">
+        <div class="legal-modal-inner">
+            <button class="legal-modal-close" data-close="termsModal" aria-label="Close">&times;</button>
+            <h2 id="termsModalTitle">Terms &amp; Conditions</h2>
+            <p class="legal-meta">Last updated: April 2026 &mdash; NOVISS OSINT, Brisbane, Queensland, Australia</p>
+
+            <h3>1. Acceptance of Terms</h3>
+            <p>By engaging NOVISS OSINT for any service, you agree to these Terms and Conditions in full. If you do not agree, please do not proceed with an engagement.</p>
+
+            <h3>2. Services</h3>
+            <p>NOVISS OSINT provides Open Source Intelligence (OSINT) research services. All investigations are conducted exclusively using publicly available, legally accessible sources. We do not access private accounts, use unauthorised means of access, or engage in any activity that would constitute a breach of any law.</p>
+
+            <h3>3. Lawful Purpose</h3>
+            <p>You warrant that your request for services is for a lawful purpose. You must not engage NOVISS OSINT to investigate individuals for purposes of harassment, stalking, unlawful discrimination, or any other illegal activity. We reserve the right to refuse or terminate any engagement that we believe, in good faith, may facilitate unlawful conduct.</p>
+
+            <h3>4. Payment Terms</h3>
+            <ul>
+                <li>A non-refundable 50% deposit is required before work commences.</li>
+                <li>The remaining balance is due upon delivery of the final report.</li>
+                <li>Quotes are valid for 7 days from the date of issue.</li>
+                <li>All prices are in Australian Dollars (AUD) and are inclusive of GST where applicable.</li>
+            </ul>
+
+            <h3>5. Refund Policy</h3>
+            <p>The 50% deposit is non-refundable once work has commenced. If we are unable to proceed with an engagement due to circumstances within our control, a full refund of any deposit paid will be issued.</p>
+
+            <h3>6. Confidentiality</h3>
+            <p>All reports, findings, and client information are treated as strictly confidential. We will not disclose the contents of any report to any third party without your consent, except where required by law.</p>
+
+            <h3>7. Limitation of Liability</h3>
+            <p>NOVISS OSINT provides information based on publicly available sources at the time of investigation. We make no warranty as to the completeness, accuracy, or currency of any information beyond what is reasonably achievable through open-source methods. To the extent permitted by Australian Consumer Law, our liability is limited to the amount paid for the relevant service.</p>
+
+            <h3>8. Intellectual Property</h3>
+            <p>Reports produced by NOVISS OSINT are provided for your personal or business use only. You must not reproduce, publish, or distribute any report without prior written consent.</p>
+
+            <h3>9. Governing Law</h3>
+            <p>These Terms are governed by the laws of Queensland, Australia. Any disputes shall be subject to the exclusive jurisdiction of the courts of Queensland.</p>
+
+            <h3>10. Changes to These Terms</h3>
+            <p>We reserve the right to update these Terms at any time. Continued use of our services after any update constitutes acceptance of the revised Terms.</p>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
