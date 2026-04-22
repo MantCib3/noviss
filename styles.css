@@ -945,6 +945,16 @@ a.nav-logo {
     color: #aaa;
 }
 
+/* Strip the card-box styling from .about-content when used in the sidebar */
+.about-blog-left .about-content {
+    background: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
+    text-align: left;
+}
+
 /* ===== About Section ===== */
 .about {
     max-width: 1400px;
