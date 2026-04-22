@@ -912,11 +912,8 @@ a.nav-logo {
     letter-spacing: 0;
     color: #111;
     width: 100%;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    display: block;
+    line-height: 1.35;
 }
 
 .about-blog-right .blog-card-lead {
