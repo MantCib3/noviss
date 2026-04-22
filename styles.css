@@ -917,6 +917,19 @@ a.nav-logo {
     margin: 0;
 }
 
+/* Beats .blog-card h3 (0,1,1) with specificity (0,2,1) */
+.about-blog-right .blog-card h3 {
+    font-size: 0.88rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: #111;
+    line-height: 1.35;
+    letter-spacing: 0;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
 .about-blog-right .blog-card-lead {
     font-size: 0.75rem;
     color: #777;
