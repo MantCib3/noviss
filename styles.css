@@ -865,7 +865,7 @@ a.nav-logo {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
-    align-items: center;
+    align-items: start;
 }
 
 .about-blog-left .how-it-works-heading {
