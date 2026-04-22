@@ -345,13 +345,13 @@ style.textContent = `
     }
 
     .fade-in {
-        animation: fadeInUp 0.6s ease-out;
+        animation: fadeInUp 0.6s ease-out forwards;
     }
 
     @keyframes fadeInUp {
         from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
         }
         to {
             opacity: 1;
