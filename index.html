@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,7 +32,7 @@
         <div class="hero-content">
             <h2 class="hero-subtitle"></h2>
             <h1>Professional Mapping & Analysis</h1>
-            <p>NOVISS transforms limited starting information — such as a username, handle, photo, email, or basic personal details — into a clear, structured, and actionable picture of an individual’s publicly visible online footprint.</p>
+            <p>NOVISS maps an individual’s full public online footprint from minimal starting details — username, handle, photo, email, or basic information. We deliver a clear, structured, and actionable intelligence picture.</p>
             <p class="highlight-sub">Custom OSINT investigations starting from $70 AUD. Includes a free preliminary assessment.</p>
             <button class="btn btn-primary" data-link="#contact">Start an Investigation</button>
         </div>
@@ -41,45 +41,64 @@
             <h3>Included in Every Report</h3>
             <ul class="report-list">
                 <li><strong>Executive Summary</strong> with confidence ratings for each key finding</li>
-                <li><strong>Visual mapping</strong> of linked profiles and their connections</li>
-                <li><strong>Chronological overview</strong> of observable public activity</li>
-                <li><strong>Carefully inferred insights</strong> drawn exclusively from public sources</li>
-                <li><strong>Anonymised screenshots</strong> with source references and timestamps</li>
-                <li><strong>Practical recommendations</strong> where applicable</li>
+                <li><strong>Visual mapping</strong> of linked profiles and connections</li>
+                <li><strong>Chronological timeline</strong> of public activity and patterns</li>
+                <li><strong>Insights & patterns</strong> drawn from cross-referenced sources</li>
+                <li><strong>Annotated screenshots</strong> with references and timestamps</li>
+                <li><strong>Practical recommendations</strong> where relevant</li>
             </ul>
         </div>
     </section>
 
-    <!-- What We Do Section (replaces the old clunky Core Service) -->
+    <!-- What We Do Section -->
     <section id="core-service" class="what-we-do">
         <div class="section-container">
             <h2 class="how-it-works-heading sm">What We Do</h2>
-            <p class="section-intro">NOVISS provides professional, ethical Open Source Intelligence focused exclusively on publicly available information. We transform scattered online traces into clear, structured insights — without accessing private accounts, using deception, or crossing ethical boundaries.</p>
-            
-            <div class="capabilities-grid">
-                <div class="capability-card">
-                    <h3>Username &amp; Handle Discovery</h3>
-                    <p>Comprehensive searches across social platforms, gaming networks, forums, Reddit, and niche communities.</p>
+            <p class="section-intro">NOVISS applies a disciplined intelligence cycle to transform minimal starting information into a clear, actionable picture of an individual&#39;s public online footprint. Structured phases of planning, collection, processing, analysis, and production ensure thoroughness, accuracy, and transparency in every engagement.</p>
+
+            <div class="intel-cycle-ring" aria-label="Intelligence Cycle Diagram">
+                <!-- SVG ring and directional arrows -->
+                <svg class="cycle-svg" viewBox="0 0 900 900" aria-hidden="true" focusable="false">
+                    <!-- Dashed ring -->
+                    <circle cx="450" cy="450" r="270" fill="none" stroke="#e0e0e0" stroke-width="1.5" stroke-dasharray="7,5"/>
+                    <!-- Directional arrows at arc midpoints (clockwise) -->
+                    <!-- Between Planning and Collection: midpoint theta=54deg, tangent=36deg -->
+                    <path d="M -9,-5.5 L 9,0 L -9,5.5 Z" fill="#c8c8c8" transform="translate(609,232) rotate(36)"/>
+                    <!-- Between Collection and Processing: midpoint theta=18deg, tangent=108deg -->
+                    <path d="M -9,-5.5 L 9,0 L -9,5.5 Z" fill="#c8c8c8" transform="translate(707,534) rotate(108)"/>
+                    <!-- Between Processing and Analysis: midpoint theta=90deg (bottom), tangent=180deg -->
+                    <path d="M -9,-5.5 L 9,0 L -9,5.5 Z" fill="#c8c8c8" transform="translate(450,720) rotate(180)"/>
+                    <!-- Between Analysis and Dissemination: midpoint theta=162deg, tangent=252deg -->
+                    <path d="M -9,-5.5 L 9,0 L -9,5.5 Z" fill="#c8c8c8" transform="translate(193,534) rotate(252)"/>
+                    <!-- Between Dissemination and Planning: midpoint theta=234deg, tangent=324deg -->
+                    <path d="M -9,-5.5 L 9,0 L -9,5.5 Z" fill="#c8c8c8" transform="translate(291,232) rotate(324)"/>
+                </svg>
+
+                <!-- Stage cards positioned around the ring -->
+                <div class="cycle-card" data-step="1">
+                    <div class="cycle-step-num">01</div>
+                    <h3>Planning &amp; Direction</h3>
+                    <p>Clarify objectives, define scope, and build a tailored investigation plan from the provided starting information.</p>
                 </div>
-                <div class="capability-card">
-                    <h3>Profile Linking</h3>
-                    <p>Identification of connected accounts and consistent patterns to reveal a complete public online presence.</p>
+                <div class="cycle-card" data-step="2">
+                    <div class="cycle-step-num">02</div>
+                    <h3>Collection</h3>
+                    <p>Exhaustive sweeps across social platforms, gaming networks, forums, archives, and niche communities.</p>
                 </div>
-                <div class="capability-card">
-                    <h3>Activity &amp; Timeline Analysis</h3>
-                    <p>Clear chronological mapping of observable public activity, posting patterns, and recurring themes.</p>
+                <div class="cycle-card" data-step="3">
+                    <div class="cycle-step-num">03</div>
+                    <h3>Processing &amp; Exploitation</h3>
+                    <p>Deduplicate, normalise, and assess source credibility. Selective ethical verification closes clear gaps.</p>
                 </div>
-                <div class="capability-card">
-                    <h3>Location &amp; Contextual Clues</h3>
-                    <p>General location indicators derived from timezones, public mentions, and available geotags.</p>
+                <div class="cycle-card" data-step="4">
+                    <div class="cycle-step-num">04</div>
+                    <h3>Analysis &amp; Production</h3>
+                    <p>Pattern identification, semantic matching, network mapping, and confidence-rated synthesis of findings.</p>
                 </div>
-                <div class="capability-card">
-                    <h3>Reverse Image Search</h3>
-                    <p>Advanced analysis of provided photos to uncover additional public connections and references.</p>
-                </div>
-                <div class="capability-card">
-                    <h3>Ethical Verification</h3>
-                    <p>Light, natural public interactions only when they add genuine value and remain fully ethical.</p>
+                <div class="cycle-card" data-step="5">
+                    <div class="cycle-step-num">05</div>
+                    <h3>Dissemination</h3>
+                    <p>Professional PDF with executive summary, visual maps, timeline, annotated screenshots, and clear recommendations.</p>
                 </div>
             </div>
         </div>
@@ -103,20 +122,22 @@
             </div>
             <div id="process" class="process-prose">
                 <h3 class="how-it-works-heading prose-heading">How It Works</h3>
-                <p>We begin with a short intake where you provide the primary username or handle, plus any supporting details such as a photo, email, or particular areas you want examined.</p>
-                <p>We then conduct a free preliminary review of publicly available sources and send you a custom quote detailing the expected scope and effort. There is no obligation at this stage.</p>
-                <p>If the quote is acceptable, you pay a 50% deposit to proceed. All payments are processed securely.</p>
-                <p>Once authorised, we carry out detailed cross-referencing across platforms, examine observable public activity and patterns, and include limited ethical verification only where it materially strengthens the findings.</p>
-                <p>On completion you receive a clear, structured PDF report. The balance is payable on delivery.</p>
+                <p>Submit a short intake with the primary username or handle, plus any supporting details such as a photo, email, or focus areas.</p>
+                <p>We perform a free preliminary review and send a custom quote with expected scope and effort. No obligation.</p>
+                <p>If you proceed, pay a 50% deposit. All payments are processed securely.</p>
+                <p>We then conduct detailed cross-platform analysis, map activity patterns, and apply light public verification where it adds meaningful value.</p>
+                <p>You receive a structured PDF report. The balance is due on delivery.</p>
             </div>
         </div>
 
         <!-- Our Approach + Blog -->
         <div class="about-blog-layout about-blog-inset">
             <div class="about-blog-left">
-                <h2 class="how-it-works-heading sm">Our Approach</h2>
+                <h2 class="how-it-works-heading sm">About Us</h2>
                 <div class="about-content">
-                    <p>NOVISS is committed to delivering precise, ethical, and thoroughly cross-referenced OSINT. We focus on subtle but meaningful public clues, maintain strict ethical standards, and apply natural engagement only when it materially improves the reliability of findings. Our goal is to provide clients with clear, trustworthy insights — never rushed or speculative conclusions. All work is conducted exclusively within legal and ethical boundaries using publicly available sources.</p>
+                    <p>NOVISS is an Australian-based service focused on analysing publicly available digital behaviour. The aim is to turn scattered online signals into clear, structured insights.</p>
+                    <p>The work is grounded in disciplined, evidence-based analysis. Findings are presented with explicit confidence levels, and limitations are clearly stated. Probabilistic links are treated as such, never as certainties.</p>
+                    <p>The objective is simple: reduce ambiguity and provide information that is coherent, reliable, and usable.</p>
                 </div>
             </div>
             <div class="about-blog-right">
@@ -145,7 +166,7 @@
         </div>
 
         <h2 id="pricing-cards" class="how-it-works-heading sm" style="margin-top: 7rem;">Transparent Pricing</h2>
-        <p class="section-intro">We use a custom quote system to ensure you only pay for the actual effort required for your specific case. A free preliminary review provides an accurate assessment before any commitment.</p>
+        <p class="section-intro">We use a custom quote system based on the actual effort required for your case. A free preliminary review gives you an accurate assessment before any commitment.</p>
         
         <div class="pricing-grid">
             <div class="pricing-card">
@@ -166,7 +187,7 @@
                 <ul>
                     <li>Linked profiles across platforms</li>
                     <li>Detailed activity analysis</li>
-                    <li>Ethical verification steps</li>
+                    <li>Targeted verification steps</li>
                 </ul>
             </div>
             <div class="pricing-card">
@@ -229,7 +250,7 @@
         <div class="faq-grid">
             <div class="faq-item">
                 <h3 class="faq-question">Why do you use custom quotes instead of fixed pricing?</h3>
-                <p class="faq-answer">The level of effort varies significantly depending on the quality of the starting information and the commonality of the username. Our free preliminary review ensures you receive a fair and accurate quote based on the actual work required.</p>
+                <p class="faq-answer">The level of effort varies depending on the quality of the starting information and the commonality of the username. Our free preliminary review ensures you receive a fair and accurate quote based on the actual work required.</p>
             </div>
             <div class="faq-item">
                 <h3 class="faq-question">What if little or no public information is found?</h3>
@@ -237,7 +258,7 @@
             </div>
             <div class="faq-item">
                 <h3 class="faq-question">Is the deposit refundable?</h3>
-                <p class="faq-answer">Yes. If we are unable to deliver meaningful public information after commencing the investigation, the deposit will be refunded in full.</p>
+                <p class="faq-answer">Yes. If we are unable to deliver meaningful findings after commencing the investigation, the deposit will be refunded in full.</p>
             </div>
             <div class="faq-item">
                 <h3 class="faq-question">How do you protect client privacy?</h3>
@@ -258,9 +279,9 @@
     <section id="disclaimers" class="disclaimers">
         <h2 class="how-it-works-heading sm">Disclaimers</h2>
         <ul class="disclaimer-list">
-            <li>All investigations are strictly limited to publicly available information and minimal ethical engagement.</li>
+            <li>All investigations combine publicly available information with limited ethical public engagement.</li>
             <li>Reports contain only non-private, inferred insights. We never provide raw private messages, restricted data, or direct contact information.</li>
-            <li>Results are not guaranteed and depend entirely on what is publicly visible at the time of the investigation.</li>
+            <li>Results are not guaranteed and depend on what is publicly visible at the time of the investigation.</li>
             <li>This service is not intended for use in legal proceedings, court evidence, debt collection, or any official investigative purposes. For such requirements, please engage a licensed Queensland private investigator.</li>
             <li>NOVISS fully complies with the Australian Privacy Principles under the Privacy Act 1988. Client information is kept to a minimum and securely deleted after report delivery.</li>
         </ul>
@@ -301,7 +322,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 NOVISS OSINT. All rights reserved. Ethical Open Source Intelligence — Brisbane, Australia.</p>
+            <p>&copy; 2026 NOVISS OSINT. All rights reserved. Brisbane, Australia.</p>
         </div>
     </footer>
 
@@ -363,7 +384,7 @@
             <p>By engaging NOVISS OSINT for any service, you agree to these Terms and Conditions in full. If you do not agree, please do not proceed with an engagement.</p>
 
             <h3>2. Services</h3>
-            <p>NOVISS OSINT provides Open Source Intelligence (OSINT) research services. All investigations are conducted exclusively using publicly available, legally accessible sources. We do not access private accounts, use unauthorised means of access, or engage in any activity that would constitute a breach of any law.</p>
+            <p>NOVISS OSINT provides Open Source Intelligence (OSINT) research services. All investigations are conducted using publicly available sources combined with limited ethical public engagement. We do not access private accounts or use unauthorised means.</p>
 
             <h3>3. Lawful Purpose</h3>
             <p>You warrant that your request for services is for a lawful purpose. You must not engage NOVISS OSINT to investigate individuals for purposes of harassment, stalking, unlawful discrimination, or any other illegal activity. We reserve the right to refuse or terminate any engagement that we believe, in good faith, may facilitate unlawful conduct.</p>
