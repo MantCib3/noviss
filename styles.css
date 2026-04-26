@@ -304,7 +304,7 @@ a.nav-logo {
 .report-text {
     background: var(--card-bg);
     backdrop-filter: blur(10px);
-    padding: 1.1rem 1.25rem;
+    padding: 1.4rem 1.5rem;
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
     transition: all var(--transition);
@@ -1735,15 +1735,21 @@ a.nav-logo {
     .hero {
         display: flex;
         flex-direction: column;
-        padding-bottom: 3rem;
+        padding: 2rem 1.25rem 4rem;
         overflow: visible;
         gap: 2rem;
+        height: auto;
+        position: relative;
+        z-index: 0;
+        margin-bottom: 2rem;
     }
 
     .report-text {
         margin-top: 0;
         width: 100%;
         box-sizing: border-box;
+        position: relative;
+        z-index: 0;
     }
 
     .hero-content h1 {
@@ -2079,15 +2085,16 @@ a.nav-logo {
 
 .report-list {
     list-style: none;
-    margin-bottom: 2rem;
+    margin-bottom: 0;
 }
 
 .report-list li {
-    font-size: 1rem;
+    font-size: 0.88rem;
     color: #666;
-    margin-bottom: 1rem;
-    padding-left: 1.5rem;
+    margin-bottom: 0.45rem;
+    padding-left: 1.4rem;
     position: relative;
+    line-height: 1.5;
 }
 
 .report-list li:before {
