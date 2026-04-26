@@ -189,9 +189,11 @@ if (navLogo) {
     navLogo.addEventListener('click', e => {
         e.preventDefault();
         const blogPage = document.getElementById('blog-page');
+        const articlePage = document.getElementById('article-page');
         const mainApp = document.getElementById('main-app');
-        if (blogPage && mainApp && blogPage.style.display !== 'none') {
-            blogPage.style.display = 'none';
+        if (mainApp) {
+            if (blogPage && blogPage.style.display !== 'none') blogPage.style.display = 'none';
+            if (articlePage && articlePage.style.display !== 'none') articlePage.style.display = 'none';
             mainApp.style.display = '';
         }
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -248,11 +250,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const href = this.getAttribute('href');
         if (!href || href === '#') return;
-        // If blog page is visible, return to main content first
+        // If blog/article page is visible, return to main content first
         const blogPage = document.getElementById('blog-page');
+        const articlePage = document.getElementById('article-page');
         const mainApp = document.getElementById('main-app');
-        if (blogPage && mainApp && blogPage.style.display !== 'none') {
-            blogPage.style.display = 'none';
+        if (mainApp) {
+            if (blogPage && blogPage.style.display !== 'none') blogPage.style.display = 'none';
+            if (articlePage && articlePage.style.display !== 'none') articlePage.style.display = 'none';
             mainApp.style.display = '';
         }
         try {
@@ -396,42 +400,72 @@ console.log('NOVISS OSINT website loaded successfully');
             title: 'How Open Source Intelligence Has Changed Private Investigations',
             lead: "Digital footprints have transformed what's discoverable through public channels alone.",
             date: '2026-04',
-            tag: 'OSINT'
+            tag: 'OSINT',
+            body: [
+                "Traditional private investigation relied on physical surveillance, court records, and direct interviews. The shift to documented digital behaviour has fundamentally altered what can be discovered without leaving a desk.",
+                "Social platforms, gaming networks, and public forums generate a continuous stream of behavioural data — location check-ins, activity timestamps, communication patterns, and linked accounts. A skilled investigator can map years of digital history from a single starting point.",
+                "The change isn't just in volume. It's in permanence. Old posts, deleted accounts, and cached pages form an archive that physical surveillance never could. OSINT has raised the baseline of what a thorough investigation looks like."
+            ]
         },
         {
             id: 2,
             title: 'What Your Username Reveals About You',
             lead: "Most people reuse a core handle across dozens of platforms without realising how much it links together.",
             date: '2026-03',
-            tag: 'Digital Identity'
+            tag: 'Digital Identity',
+            body: [
+                "Most usernames are not chosen at random. People pick handles they find memorable, meaningful, or aesthetically appealing — and they reuse them. A username that appears on one platform in 2016 often appears, with minor variations, across dozens of others.",
+                "Cross-referencing a single handle across social media, gaming networks, forums, and archives frequently surfaces associated email addresses, location data, profile photos, and years of interaction history. Each new connection narrows the picture further.",
+                "Variations matter too. Suffixes like numbers or underscores follow predictable patterns. Investigators familiar with common handle conventions can systematically search derivatives, dramatically expanding what a single starting username can yield."
+            ]
         },
         {
             id: 3,
             title: 'The Ethical Boundaries of OSINT: Where We Draw the Line',
             lead: "Not all publicly available information is fair game. Here's our ethical framework.",
             date: '2026-02',
-            tag: 'Ethics'
+            tag: 'Ethics',
+            body: [
+                "Publicly available information is not a licence to collect everything. The fact that something is technically accessible does not make its use appropriate in every context. Ethical OSINT practice requires constant consideration of purpose, proportionality, and potential harm.",
+                "At NOVISS, we don't reproduce private messages, access restricted content, or engage in any form of impersonation. Where light public interaction is used — such as verifying whether a profile is visible to a connected account — it is minimal, targeted, and non-deceptive.",
+                "We also decline engagements where the stated or inferred purpose suggests harassment, surveillance of a protected person, or any use inconsistent with Australian law. A refusal at intake is sometimes the most appropriate outcome."
+            ]
         },
         {
             id: 4,
             title: 'Image Reverse Search: What It Can and Cannot Tell You',
             lead: 'Profile photos carry more metadata and linkable context than most people realise.',
             date: '2026-01',
-            tag: 'Techniques'
+            tag: 'Techniques',
+            body: [
+                "A profile photo carries more linkable context than most people expect. Reverse image search tools can surface the same image — or near-identical versions — across platforms the subject may not have considered connected.",
+                "Metadata embedded in original image files can include device identifiers, GPS coordinates, and timestamps. While platforms often strip this on upload, original files shared via email, direct messages, or download links may retain it intact.",
+                "The practical limit is image uniqueness. Stock photos or heavily cropped images reduce linkability significantly. But a distinctive profile photo used consistently across accounts remains one of the more reliable cross-platform identity signals available."
+            ]
         },
         {
             id: 5,
             title: 'Cross-Platform Correlation: Linking Accounts Across Networks',
             lead: 'Consistent behavioural patterns, writing style, and timestamps often bridge accounts more reliably than usernames alone.',
             date: '2025-12',
-            tag: 'Techniques'
+            tag: 'Techniques',
+            body: [
+                "The most robust way to link accounts across networks isn't a shared username — it's consistent behaviour. Writing style, punctuation patterns, posting times, and topic focus often persist across pseudonymous accounts in ways that usernames don't.",
+                "Timestamp overlap is particularly useful. Someone who posts across two accounts at the same unusual hours, reacts to the same events, and references the same locations is likely the same person even if the handles are entirely different.",
+                "Network mapping — identifying shared followers, mutual connections, or co-mentions — adds structural confirmation. A graph of interactions across platforms can reveal clusters that point to a common identity, especially when combined with content-level signals."
+            ]
         },
         {
             id: 6,
             title: 'Reading Gaming Profiles: Steam, Discord, and Beyond',
             lead: 'Gaming networks have become one of the richest sources of persistent, cross-linked digital identity.',
             date: '2025-11',
-            tag: 'Gaming OSINT'
+            tag: 'Gaming OSINT',
+            body: [
+                "Gaming networks have become one of the richest sources of persistent digital identity. Steam profiles, Discord servers, Battle.net tags, and Roblox usernames are frequently tied to real names, linked social accounts, friend lists, and years of timestamped activity.",
+                "Games with friend list directories or activity feeds allow investigators to map social connections that may not appear anywhere else. A Discord server membership list can link a username to a community — and from there to other members with more visible profiles.",
+                "Gaming handles are also heavily reused. Many players establish a main tag early and carry it forward across every platform they join. This makes gaming-origin handles among the most stable cross-platform identifiers available."
+            ]
         }
     ];
 
@@ -453,7 +487,7 @@ console.log('NOVISS OSINT website loaded successfully');
         }
         none.style.display = 'none';
         grid.innerHTML = posts.map(p =>
-            '<div class="blog-page-card">' +
+            '<div class="blog-page-card" data-id="' + p.id + '">' +
                 '<span class="blog-page-card-tag">' + p.tag + '</span>' +
                 '<h3 class="blog-page-card-title">' + p.title + '</h3>' +
                 '<p class="blog-page-card-lead">' + p.lead + '</p>' +
@@ -464,7 +498,7 @@ console.log('NOVISS OSINT website loaded successfully');
 
     function populateDateFilter() {
         const sel = document.getElementById('blogDateFilter');
-        if (!sel || sel.options.length > 1) return; // already populated
+        if (!sel || sel.options.length > 1) return;
         const seen = new Set();
         BLOG_POSTS.forEach(p => {
             if (!seen.has(p.date)) {
@@ -494,21 +528,39 @@ console.log('NOVISS OSINT website loaded successfully');
     function showBlogPage() {
         const mainApp = document.getElementById('main-app');
         const blogPage = document.getElementById('blog-page');
+        const articlePage = document.getElementById('article-page');
         if (!mainApp || !blogPage) return;
         mainApp.style.display = 'none';
+        if (articlePage) articlePage.style.display = 'none';
         blogPage.style.display = '';
-        // Re-trigger animation
         blogPage.style.animation = 'none';
         void blogPage.offsetHeight;
         blogPage.style.animation = '';
         window.scrollTo({ top: 0 });
         populateDateFilter();
         renderPosts(BLOG_POSTS);
-        // Reset search inputs
         const searchInput = document.getElementById('blogSearch');
         if (searchInput) searchInput.value = '';
         const dateFilter = document.getElementById('blogDateFilter');
         if (dateFilter) dateFilter.value = '';
+    }
+
+    function showArticle(id) {
+        const post = BLOG_POSTS.find(p => p.id === id);
+        if (!post) return;
+        const blogPage = document.getElementById('blog-page');
+        const articlePage = document.getElementById('article-page');
+        if (!blogPage || !articlePage) return;
+        document.getElementById('articleTag').textContent = post.tag;
+        document.getElementById('articleTitle').textContent = post.title;
+        document.getElementById('articleDate').textContent = fmtDate(post.date);
+        document.getElementById('articleBody').innerHTML = post.body.map(p => '<p>' + p + '</p>').join('');
+        blogPage.style.display = 'none';
+        articlePage.style.display = '';
+        articlePage.style.animation = 'none';
+        void articlePage.offsetHeight;
+        articlePage.style.animation = '';
+        window.scrollTo({ top: 0 });
     }
 
     // Blog nav link
@@ -516,7 +568,6 @@ console.log('NOVISS OSINT website loaded successfully');
     if (blogNavLink) {
         blogNavLink.addEventListener('click', e => {
             e.preventDefault();
-            // Close mobile menu if open
             const navMenu = document.querySelector('.nav-menu');
             const hamburger = document.querySelector('.hamburger');
             if (navMenu) navMenu.classList.remove('active');
@@ -549,4 +600,17 @@ console.log('NOVISS OSINT website loaded successfully');
     // Date filter change triggers search immediately
     const dateFilter = document.getElementById('blogDateFilter');
     if (dateFilter) dateFilter.addEventListener('change', doSearch);
+
+    // Card click — open article (event delegation)
+    const blogGrid = document.getElementById('blogGrid');
+    if (blogGrid) {
+        blogGrid.addEventListener('click', e => {
+            const card = e.target.closest('.blog-page-card');
+            if (card) showArticle(parseInt(card.dataset.id, 10));
+        });
+    }
+
+    // Back button
+    const backBtn = document.getElementById('articleBackBtn');
+    if (backBtn) backBtn.addEventListener('click', () => showBlogPage());
 })();

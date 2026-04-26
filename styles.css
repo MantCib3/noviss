@@ -1129,6 +1129,72 @@ a.nav-logo {
     padding: 4rem 0;
 }
 
+/* ===== Article Page ===== */
+#article-page {
+    min-height: 80vh;
+    padding: 3rem 2rem 5rem;
+    animation: fadeInUp 0.35s ease-out forwards;
+}
+.article-page-container {
+    max-width: 720px;
+    margin: 0 auto;
+}
+.article-back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #bbb;
+    padding: 0;
+    margin-bottom: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: color 0.2s ease;
+}
+.article-back-btn:hover { color: #111; }
+.article-header {
+    margin-bottom: 0;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 2.5rem;
+}
+.article-tag {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #aaa;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 0.75rem;
+}
+.article-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    font-weight: 400;
+    color: #111;
+    line-height: 1.05;
+    letter-spacing: 0.04em;
+    margin: 0 0 0.85rem;
+}
+.article-date {
+    display: block;
+    font-size: 0.82rem;
+    color: #bbb;
+    font-family: 'Inter', sans-serif;
+}
+.article-body p {
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.9;
+    margin-bottom: 1.6rem;
+}
+
 /* Strip the card-box styling from .about-content when used in the sidebar */
 .about-blog-left .about-content {
     background: none;
