@@ -137,6 +137,21 @@
         }
     });
 
+    // Known Identifiers — dynamic add/remove
+    document.getElementById('addIdentifierBtn').addEventListener('click', function() {
+        const list = document.getElementById('identifiersList');
+        const row = document.createElement('div');
+        row.className = 'identifier-row';
+        row.innerHTML =
+            '<input type="text" name="identifierAlias[]" placeholder="Alias" autocomplete="off">' +
+            '<input type="text" name="identifierPlatform[]" placeholder="Platform" autocomplete="off">' +
+            '<button type="button" class="identifier-remove-btn" aria-label="Remove">&times;</button>';
+        row.querySelector('.identifier-remove-btn').addEventListener('click', function() {
+            row.remove();
+        });
+        list.appendChild(row);
+    });
+
     document.getElementById('contactForm').addEventListener('submit', e => {
         e.preventDefault();
         // Form submission handler — wire to backend when ready

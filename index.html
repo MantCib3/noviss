@@ -223,6 +223,10 @@
                 </div>
             </div>
             <div class="contact-field">
+                <label for="contactPurpose">Purpose</label>
+                <input type="text" id="contactPurpose" name="purpose" placeholder="Describe the purpose of your investigation request." autocomplete="off" required>
+            </div>
+            <div class="contact-field">
                 <label for="contactInfo">Investigation Details</label>
                 <textarea id="contactInfo" name="info" rows="5" placeholder="Provide the primary username or handle you'd like investigated. Include any supporting context — platforms they're active on, approximate age, region, or any other relevant public information. The more detail you provide, the more accurate our preliminary assessment will be." required></textarea>
             </div>
@@ -237,6 +241,11 @@
                     <input type="file" id="contactUpload" name="image" accept="image/png,image/jpeg,image/webp" style="display:none">
                 </label>
                 <span class="upload-filename" id="uploadFilename"></span>
+            </div>
+            <div class="contact-field">
+                <label>Known Identifiers</label>
+                <div id="identifiersList"></div>
+                <button type="button" class="identifier-add-btn" id="addIdentifierBtn">+ Add Identifier</button>
             </div>
             <div class="contact-legal-check">
                 <label class="legal-checkbox-label">
