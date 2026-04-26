@@ -1737,6 +1737,7 @@ a.nav-logo {
         flex-direction: column;
         padding: 2rem 1.25rem 4rem;
         overflow: visible;
+        max-height: none;
         gap: 2rem;
         height: auto;
         position: relative;
