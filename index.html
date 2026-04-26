@@ -18,6 +18,7 @@
                 <li><a href="#process">How It Works</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="#" id="blogNavLink">Blog</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -26,6 +27,8 @@
             </div>
         </div>
     </nav>
+
+    <div id="main-app">
 
     <!-- Hero Section -->
     <section id="osint" class="hero">
@@ -130,7 +133,7 @@
             </div>
         </div>
 
-        <!-- Our Approach + Blog -->
+        <!-- About Us + Blog -->
         <div class="about-blog-layout about-blog-inset">
             <div class="about-blog-left">
                 <h2 class="how-it-works-heading sm">About Us</h2>
@@ -141,6 +144,7 @@
                 </div>
             </div>
             <div class="about-blog-right">
+                <a class="blog-teaser-link" id="blogTeaserLink" href="#">From the Blog <span class="teaser-arrow">&#8594;</span></a>
                 <div class="blog-card">
                     <div class="blog-card-content">
                         <h3 class="sidebar-card-title" style="text-align:left">How Open Source Intelligence Has Changed Private Investigations</h3>
@@ -325,6 +329,23 @@
             <p>&copy; 2026 NOVISS OSINT. All rights reserved. Brisbane, Australia.</p>
         </div>
     </footer>
+
+    </div><!-- /#main-app -->
+
+    <!-- Blog Page -->
+    <div id="blog-page" style="display:none">
+        <div class="blog-page-container">
+            <div class="blog-search-bar">
+                <input type="text" id="blogSearch" placeholder="Search articles&#8230;" autocomplete="off">
+                <select id="blogDateFilter">
+                    <option value="">All dates</option>
+                </select>
+                <button id="blogSearchBtn" class="btn btn-primary">Search</button>
+            </div>
+            <div id="blogGrid" class="blog-page-grid"></div>
+            <p id="blogNoResults" class="blog-no-results" style="display:none">No articles match your search.</p>
+        </div>
+    </div>
 
     <!-- Privacy Policy Modal -->
     <div class="legal-modal" id="privacyModal" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle">

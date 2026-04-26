@@ -183,11 +183,17 @@ document.querySelectorAll('[data-link]').forEach(btn => {
     });
 });
 
-// ===== NOVISS logo scrolls to very top =====
+// ===== NOVISS logo scrolls to very top / exits blog page =====
 const navLogo = document.getElementById('navLogo');
 if (navLogo) {
     navLogo.addEventListener('click', e => {
         e.preventDefault();
+        const blogPage = document.getElementById('blog-page');
+        const mainApp = document.getElementById('main-app');
+        if (blogPage && mainApp && blogPage.style.display !== 'none') {
+            blogPage.style.display = 'none';
+            mainApp.style.display = '';
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
@@ -240,13 +246,19 @@ if (navLogo) {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+        // If blog page is visible, return to main content first
+        const blogPage = document.getElementById('blog-page');
+        const mainApp = document.getElementById('main-app');
+        if (blogPage && mainApp && blogPage.style.display !== 'none') {
+            blogPage.style.display = 'none';
+            mainApp.style.display = '';
         }
+        try {
+            const target = document.querySelector(href);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch (_) { }
     });
 });
 
@@ -375,3 +387,166 @@ serviceCards.forEach((card, index) => {
 
 // ===== Initialize =====
 console.log('NOVISS OSINT website loaded successfully');
+
+// ===== Blog Page =====
+(function () {
+    const BLOG_POSTS = [
+        {
+            id: 1,
+            title: 'How Open Source Intelligence Has Changed Private Investigations',
+            lead: "Digital footprints have transformed what's discoverable through public channels alone.",
+            date: '2026-04',
+            tag: 'OSINT'
+        },
+        {
+            id: 2,
+            title: 'What Your Username Reveals About You',
+            lead: "Most people reuse a core handle across dozens of platforms without realising how much it links together.",
+            date: '2026-03',
+            tag: 'Digital Identity'
+        },
+        {
+            id: 3,
+            title: 'The Ethical Boundaries of OSINT: Where We Draw the Line',
+            lead: "Not all publicly available information is fair game. Here's our ethical framework.",
+            date: '2026-02',
+            tag: 'Ethics'
+        },
+        {
+            id: 4,
+            title: 'Image Reverse Search: What It Can and Cannot Tell You',
+            lead: 'Profile photos carry more metadata and linkable context than most people realise.',
+            date: '2026-01',
+            tag: 'Techniques'
+        },
+        {
+            id: 5,
+            title: 'Cross-Platform Correlation: Linking Accounts Across Networks',
+            lead: 'Consistent behavioural patterns, writing style, and timestamps often bridge accounts more reliably than usernames alone.',
+            date: '2025-12',
+            tag: 'Techniques'
+        },
+        {
+            id: 6,
+            title: 'Reading Gaming Profiles: Steam, Discord, and Beyond',
+            lead: 'Gaming networks have become one of the richest sources of persistent, cross-linked digital identity.',
+            date: '2025-11',
+            tag: 'Gaming OSINT'
+        }
+    ];
+
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+    function fmtDate(yyyyMM) {
+        const [y, m] = yyyyMM.split('-');
+        return MONTHS[parseInt(m, 10) - 1] + ' ' + y;
+    }
+
+    function renderPosts(posts) {
+        const grid = document.getElementById('blogGrid');
+        const none = document.getElementById('blogNoResults');
+        if (!grid) return;
+        if (posts.length === 0) {
+            grid.innerHTML = '';
+            none.style.display = 'block';
+            return;
+        }
+        none.style.display = 'none';
+        grid.innerHTML = posts.map(p =>
+            '<div class="blog-page-card">' +
+                '<span class="blog-page-card-tag">' + p.tag + '</span>' +
+                '<h3 class="blog-page-card-title">' + p.title + '</h3>' +
+                '<p class="blog-page-card-lead">' + p.lead + '</p>' +
+                '<span class="blog-page-card-meta">' + fmtDate(p.date) + '</span>' +
+            '</div>'
+        ).join('');
+    }
+
+    function populateDateFilter() {
+        const sel = document.getElementById('blogDateFilter');
+        if (!sel || sel.options.length > 1) return; // already populated
+        const seen = new Set();
+        BLOG_POSTS.forEach(p => {
+            if (!seen.has(p.date)) {
+                seen.add(p.date);
+                const opt = document.createElement('option');
+                opt.value = p.date;
+                opt.textContent = fmtDate(p.date);
+                sel.appendChild(opt);
+            }
+        });
+    }
+
+    function doSearch() {
+        const query = (document.getElementById('blogSearch').value || '').toLowerCase().trim();
+        const dateFilter = document.getElementById('blogDateFilter').value;
+        const results = BLOG_POSTS.filter(p => {
+            const matchText = !query ||
+                p.title.toLowerCase().includes(query) ||
+                p.lead.toLowerCase().includes(query) ||
+                p.tag.toLowerCase().includes(query);
+            const matchDate = !dateFilter || p.date === dateFilter;
+            return matchText && matchDate;
+        });
+        renderPosts(results);
+    }
+
+    function showBlogPage() {
+        const mainApp = document.getElementById('main-app');
+        const blogPage = document.getElementById('blog-page');
+        if (!mainApp || !blogPage) return;
+        mainApp.style.display = 'none';
+        blogPage.style.display = '';
+        // Re-trigger animation
+        blogPage.style.animation = 'none';
+        void blogPage.offsetHeight;
+        blogPage.style.animation = '';
+        window.scrollTo({ top: 0 });
+        populateDateFilter();
+        renderPosts(BLOG_POSTS);
+        // Reset search inputs
+        const searchInput = document.getElementById('blogSearch');
+        if (searchInput) searchInput.value = '';
+        const dateFilter = document.getElementById('blogDateFilter');
+        if (dateFilter) dateFilter.value = '';
+    }
+
+    // Blog nav link
+    const blogNavLink = document.getElementById('blogNavLink');
+    if (blogNavLink) {
+        blogNavLink.addEventListener('click', e => {
+            e.preventDefault();
+            // Close mobile menu if open
+            const navMenu = document.querySelector('.nav-menu');
+            const hamburger = document.querySelector('.hamburger');
+            if (navMenu) navMenu.classList.remove('active');
+            if (hamburger) hamburger.classList.remove('active');
+            showBlogPage();
+        });
+    }
+
+    // Blog teaser link
+    const teaserLink = document.getElementById('blogTeaserLink');
+    if (teaserLink) {
+        teaserLink.addEventListener('click', e => {
+            e.preventDefault();
+            showBlogPage();
+        });
+    }
+
+    // Search button
+    const searchBtn = document.getElementById('blogSearchBtn');
+    if (searchBtn) searchBtn.addEventListener('click', doSearch);
+
+    // Enter key in search input
+    const searchInput = document.getElementById('blogSearch');
+    if (searchInput) {
+        searchInput.addEventListener('keydown', e => {
+            if (e.key === 'Enter') doSearch();
+        });
+    }
+
+    // Date filter change triggers search immediately
+    const dateFilter = document.getElementById('blogDateFilter');
+    if (dateFilter) dateFilter.addEventListener('change', doSearch);
+})();
