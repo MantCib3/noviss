@@ -545,17 +545,20 @@ console.log('NOVISS OSINT website loaded successfully');
         if (dateFilter) dateFilter.value = '';
     }
 
-    function showArticle(id) {
+    let _articleOrigin = 'blog'; // 'blog' or 'main'
+
+    function showArticle(id, origin) {
         const post = BLOG_POSTS.find(p => p.id === id);
         if (!post) return;
+        _articleOrigin = origin || 'blog';
         const blogPage = document.getElementById('blog-page');
         const articlePage = document.getElementById('article-page');
-        if (!blogPage || !articlePage) return;
+        if (!articlePage) return;
         document.getElementById('articleTag').textContent = post.tag;
         document.getElementById('articleTitle').textContent = post.title;
         document.getElementById('articleDate').textContent = fmtDate(post.date);
         document.getElementById('articleBody').innerHTML = post.body.map(p => '<p>' + p + '</p>').join('');
-        blogPage.style.display = 'none';
+        if (blogPage) blogPage.style.display = 'none';
         articlePage.style.display = '';
         articlePage.style.animation = 'none';
         void articlePage.offsetHeight;
@@ -612,5 +615,30 @@ console.log('NOVISS OSINT website loaded successfully');
 
     // Back button
     const backBtn = document.getElementById('articleBackBtn');
-    if (backBtn) backBtn.addEventListener('click', () => showBlogPage());
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            const articlePage = document.getElementById('article-page');
+            if (articlePage) articlePage.style.display = 'none';
+            if (_articleOrigin === 'main') {
+                const mainApp = document.getElementById('main-app');
+                if (mainApp) { mainApp.style.display = ''; window.scrollTo({ top: 0 }); }
+            } else {
+                showBlogPage();
+            }
+        });
+    }
+
+    // Sidebar cards on the main page
+    const aboutBlogRight = document.querySelector('.about-blog-right');
+    if (aboutBlogRight) {
+        aboutBlogRight.addEventListener('click', e => {
+            const card = e.target.closest('.blog-card[data-article-id]');
+            if (card) {
+                const id = parseInt(card.dataset.articleId, 10);
+                const mainApp = document.getElementById('main-app');
+                if (mainApp) mainApp.style.display = 'none';
+                showArticle(id, 'main');
+            }
+        });
+    }
 })();
