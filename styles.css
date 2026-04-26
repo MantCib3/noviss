@@ -2686,6 +2686,22 @@ a.nav-logo {
         grid-template-columns: 1fr;
     }
 
+    .hero {
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+        max-height: none;
+        height: auto;
+        gap: 2rem;
+        padding: 2rem 1.25rem 4rem;
+        margin-bottom: 2rem;
+    }
+
+    .report-text {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
     .hero-content h1 {
         font-size: 2.5rem;
     }
@@ -2695,11 +2711,11 @@ a.nav-logo {
     }
 
     .nav-menu {
-        display: none;
+        display: none !important;
     }
 
     .hamburger {
-        display: flex;
+        display: none !important;
     }
 
     .nav-container {
