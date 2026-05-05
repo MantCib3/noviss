@@ -212,22 +212,22 @@
                 <label for="contactInfo">Investigation Details</label>
                 <textarea id="contactInfo" name="info" rows="5" maxlength="3000" placeholder="Provide the primary username or handle you'd like investigated. Include any supporting context — platforms they're active on, approximate age, region, or any other relevant public information. The more detail you provide, the more accurate our preliminary assessment will be." required></textarea>
             </div>
-            <div class="contact-field">
-                <label class="upload-label" for="contactUpload">
-                    Supporting Image <span class="upload-hint">(optional — profile photo, screenshot, etc.)</span>
-                </label>
-                <label class="upload-zone" for="contactUpload" id="uploadZone">
-                    <span class="upload-icon">&#8679;</span>
-                    <span class="upload-text">Drag & drop or click to upload</span>
-                    <span class="upload-sub">PNG, JPG, WEBP up to 10MB</span>
-                    <input type="file" id="contactUpload" name="image" accept="image/png,image/jpeg,image/webp" style="display:none">
-                </label>
-                <span class="upload-filename" id="uploadFilename"></span>
-            </div>
-            <div class="contact-field">
-                <label>Known Identifiers</label>
-                <div id="identifiersList"></div>
-                <button type="button" class="identifier-add-btn" id="addIdentifierBtn">+ Add Identifier</button>
+            <div class="contact-image-identifier-row">
+                <div class="contact-field">
+                    <label class="upload-label" for="contactUpload">Image(s)</label>
+                    <label class="upload-zone" for="contactUpload" id="uploadZone">
+                        <span class="upload-icon">&#8679;</span>
+                        <span class="upload-text">Click to upload</span>
+                        <span class="upload-sub">PNG, JPG, WEBP</span>
+                        <input type="file" id="contactUpload" name="image" accept="image/png,image/jpeg,image/webp" style="display:none">
+                    </label>
+                    <span class="upload-filename" id="uploadFilename"></span>
+                </div>
+                <div class="contact-field">
+                    <label>Identifiers</label>
+                    <div id="identifiersList"></div>
+                    <button type="button" class="identifier-add-btn" id="addIdentifierBtn">+ Add Identifier</button>
+                </div>
             </div>
             <div class="contact-legal-check">
                 <label class="legal-checkbox-label">
