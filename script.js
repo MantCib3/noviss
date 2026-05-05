@@ -209,6 +209,14 @@
 
         if (!valid) return;
 
+        // ── Guard: Turnstile error state ────────────────────────────────────────
+        if (form.dataset.turnstileError) {
+            const statusEl = document.getElementById('formStatus');
+            statusEl.textContent = 'Verification failed. Please refresh the page and try again.';
+            statusEl.className   = 'form-status error';
+            return;
+        }
+
         // ── Guard: Turnstile must have resolved a token ──────────────────────────
         const turnstileInput = form.querySelector('[name="cf-turnstile-response"]');
         if (!turnstileInput || !turnstileInput.value) {
@@ -741,3 +749,17 @@ serviceCards.forEach((card, index) => {
         });
     }
 })();
+
+// ===== Turnstile Error Callback =====
+// Called by the widget when verification fails (e.g. hostname not allowed).
+// data-retry="never" on the widget prevents automatic infinite retries;
+// this callback surfaces a clear message and marks the form so submit is blocked.
+function onTurnstileError(code) {
+    const statusEl = document.getElementById('formStatus');
+    if (statusEl) {
+        statusEl.textContent = 'Verification could not be completed. Please refresh the page and try again.';
+        statusEl.className   = 'form-status error';
+    }
+    const form = document.getElementById('contactForm');
+    if (form) form.dataset.turnstileError = '1';
+}
