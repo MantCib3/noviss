@@ -142,19 +142,127 @@
         const list = document.getElementById('identifiersList');
         const row = document.createElement('div');
         row.className = 'identifier-row';
-        row.innerHTML =
-            '<input type="text" name="identifierAlias[]" placeholder="Alias" autocomplete="off">' +
-            '<input type="text" name="identifierPlatform[]" placeholder="Platform" autocomplete="off">' +
-            '<button type="button" class="identifier-remove-btn" aria-label="Remove">&times;</button>';
-        row.querySelector('.identifier-remove-btn').addEventListener('click', function() {
-            row.remove();
-        });
+        const aliasInput = document.createElement('input');
+        aliasInput.type = 'text';
+        aliasInput.name = 'identifierAlias[]';
+        aliasInput.placeholder = 'Alias';
+        aliasInput.autocomplete = 'off';
+        aliasInput.maxLength = 100;
+        const platformInput = document.createElement('input');
+        platformInput.type = 'text';
+        platformInput.name = 'identifierPlatform[]';
+        platformInput.placeholder = 'Platform';
+        platformInput.autocomplete = 'off';
+        platformInput.maxLength = 100;
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'identifier-remove-btn';
+        removeBtn.setAttribute('aria-label', 'Remove');
+        removeBtn.textContent = '\u00d7';
+        removeBtn.addEventListener('click', function() { row.remove(); });
+        row.appendChild(aliasInput);
+        row.appendChild(platformInput);
+        row.appendChild(removeBtn);
         list.appendChild(row);
     });
 
     document.getElementById('contactForm').addEventListener('submit', e => {
         e.preventDefault();
-        // Form submission handler — wire to backend when ready
+        const form = e.target;
+
+        // Clear previous validation state
+        form.querySelectorAll('.field-error').forEach(el => el.remove());
+        form.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+
+        let valid = true;
+
+        function flagField(id, msg) {
+            valid = false;
+            const input = document.getElementById(id);
+            if (!input) return;
+            input.classList.add('input-error');
+            const err = document.createElement('span');
+            err.className = 'field-error';
+            err.textContent = msg;
+            input.parentElement.appendChild(err);
+        }
+
+        const name    = form.name.value.trim();
+        const email   = form.email.value.trim();
+        const purpose = form.purpose.value.trim();
+        const info    = form.info.value.trim();
+
+        if (!name)    flagField('contactName',    'Name is required.');
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+                      flagField('contactEmail',   'A valid email address is required.');
+        if (!purpose) flagField('contactPurpose', 'Please describe the purpose.');
+        if (!info)    flagField('contactInfo',    'Investigation details are required.');
+
+        if (!form.legalConsent.checked) {
+            valid = false;
+            const legalWrap = document.getElementById('legalConsent').parentElement.parentElement;
+            const err = document.createElement('span');
+            err.className = 'field-error';
+            err.textContent = 'You must accept the Privacy Policy and Terms to proceed.';
+            legalWrap.appendChild(err);
+        }
+
+        if (!valid) return;
+
+        // ── Guard: Turnstile must have resolved a token ──────────────────────────
+        const turnstileInput = form.querySelector('[name="cf-turnstile-response"]');
+        if (!turnstileInput || !turnstileInput.value) {
+            const statusEl = document.getElementById('formStatus');
+            statusEl.textContent = 'Please wait for the verification check to complete, then try again.';
+            statusEl.className   = 'form-status error';
+            return;
+        }
+
+        // ── Submit to Cloudflare Worker ──────────────────────────────────────────
+        const submitBtn = form.querySelector('.contact-submit');
+        const statusEl  = document.getElementById('formStatus');
+
+        submitBtn.disabled    = true;
+        submitBtn.textContent = 'Sending\u2026';
+        statusEl.textContent  = '';
+        statusEl.className    = 'form-status';
+
+        const controller = new AbortController();
+        const timeout    = setTimeout(() => controller.abort(), 15000);
+
+        fetch('https://tight-pond-8193.noviss-osint.workers.dev', {
+            method: 'POST',
+            body:   new FormData(form),
+            signal: controller.signal,
+        })
+        .then(res => res.json())
+        .then(json => {
+            if (json.ok) {
+                form.reset();
+                document.getElementById('identifiersList').innerHTML = '';
+                document.getElementById('uploadFilename').textContent = '';
+                // Only reset Turnstile on success so it's ready for a fresh submission
+                if (window.turnstile) window.turnstile.reset();
+                statusEl.textContent = 'Your enquiry has been sent. We\u2019ll be in touch within 24 hours.';
+                statusEl.className   = 'form-status success';
+            } else {
+                statusEl.textContent = json.error || 'Something went wrong. Please try again.';
+                statusEl.className   = 'form-status error';
+            }
+        })
+        .catch(err => {
+            if (err.name === 'AbortError') {
+                statusEl.textContent = 'The request timed out. Please check your connection and try again.';
+            } else {
+                statusEl.textContent = 'A network error occurred. Please check your connection and try again.';
+            }
+            statusEl.className = 'form-status error';
+        })
+        .finally(() => {
+            clearTimeout(timeout);
+            submitBtn.disabled    = false;
+            submitBtn.textContent = 'Send';
+        });
     });
 })();
 
@@ -311,9 +419,6 @@ buttons.forEach(button => {
         this.appendChild(ripple);
         
         setTimeout(() => ripple.remove(), 600);
-        
-        // Log button click
-        console.log('Button clicked:', this.textContent);
     });
 });
 
@@ -331,8 +436,7 @@ window.addEventListener('scroll', () => {
 const blogCards = document.querySelectorAll('.blog-card');
 blogCards.forEach(card => {
     card.addEventListener('click', function() {
-        console.log('Blog post clicked:', this.querySelector('h3').textContent);
-        // You can add navigation logic here
+        // Navigation logic handled by blog page section below
     });
 });
 
@@ -350,47 +454,7 @@ function animateValue(element, start, end, duration) {
     window.requestAnimationFrame(step);
 }
 
-// ===== Add Ripple Effect CSS =====
-const style = document.createElement('style');
-style.textContent = `
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.6);
-        width: 20px;
-        height: 20px;
-        margin-top: -10px;
-        margin-left: -10px;
-        animation: ripple-animation 0.6s ease-out;
-    }
 
-    @keyframes ripple-animation {
-        0% {
-            opacity: 1;
-            transform: scale(1);
-        }
-        100% {
-            opacity: 0;
-            transform: scale(4);
-        }
-    }
-
-    .fade-in {
-        animation: fadeInUp 0.6s ease-out forwards;
-    }
-
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-`;
-document.head.appendChild(style);
 
 // ===== Service Card Interaction =====
 const serviceCards = document.querySelectorAll('.service-card');
@@ -405,7 +469,6 @@ serviceCards.forEach((card, index) => {
 });
 
 // ===== Initialize =====
-console.log('NOVISS OSINT website loaded successfully');
 
 // ===== Blog Page =====
 (function () {
@@ -501,14 +564,29 @@ console.log('NOVISS OSINT website loaded successfully');
             return;
         }
         none.style.display = 'none';
-        grid.innerHTML = posts.map(p =>
-            '<div class="blog-page-card" data-id="' + p.id + '">' +
-                '<span class="blog-page-card-tag">' + p.tag + '</span>' +
-                '<h3 class="blog-page-card-title">' + p.title + '</h3>' +
-                '<p class="blog-page-card-lead">' + p.lead + '</p>' +
-                '<span class="blog-page-card-meta">' + fmtDate(p.date) + '</span>' +
-            '</div>'
-        ).join('');
+        grid.innerHTML = '';
+        posts.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'blog-page-card';
+            card.dataset.id = p.id;
+            const tag = document.createElement('span');
+            tag.className = 'blog-page-card-tag';
+            tag.textContent = p.tag;
+            const title = document.createElement('h3');
+            title.className = 'blog-page-card-title';
+            title.textContent = p.title;
+            const lead = document.createElement('p');
+            lead.className = 'blog-page-card-lead';
+            lead.textContent = p.lead;
+            const meta = document.createElement('span');
+            meta.className = 'blog-page-card-meta';
+            meta.textContent = fmtDate(p.date);
+            card.appendChild(tag);
+            card.appendChild(title);
+            card.appendChild(lead);
+            card.appendChild(meta);
+            grid.appendChild(card);
+        });
     }
 
     function populateDateFilter() {
@@ -572,7 +650,13 @@ console.log('NOVISS OSINT website loaded successfully');
         document.getElementById('articleTag').textContent = post.tag;
         document.getElementById('articleTitle').textContent = post.title;
         document.getElementById('articleDate').textContent = fmtDate(post.date);
-        document.getElementById('articleBody').innerHTML = post.body.map(p => '<p>' + p + '</p>').join('');
+        const bodyEl = document.getElementById('articleBody');
+        bodyEl.innerHTML = '';
+        post.body.forEach(para => {
+            const p = document.createElement('p');
+            p.textContent = para;
+            bodyEl.appendChild(p);
+        });
         if (blogPage) blogPage.style.display = 'none';
         articlePage.style.display = '';
         articlePage.style.animation = 'none';

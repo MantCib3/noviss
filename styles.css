@@ -14,7 +14,7 @@ section {
 }
 
 section.fade-in {
-    opacity: 1;
+    animation: fadeInUp 0.6s ease-out forwards;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&family=Bebas+Neue&display=swap');
@@ -2796,3 +2796,61 @@ a.nav-logo {
         gap: 1.5rem;
     }
 }
+
+
+/* ===== Animations ===== */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ripple-animation {
+    0%   { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(4); }
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    animation: ripple-animation 0.6s ease-out;
+}
+
+/* ===== Form Validation ===== */
+.field-error {
+    display: block;
+    color: #c0392b;
+    font-size: 0.8rem;
+    margin-top: 0.35rem;
+}
+
+.input-error {
+    border-color: #c0392b !important;
+    outline-color: #c0392b;
+}
+
+/* ===== Form Status Message ===== */
+.form-status {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    min-height: 1.4em;
+}
+.form-status.success {
+    color: #1a7a3c;
+}
+.form-status.error {
+    color: #c0392b;
+}
+
+/* ===== Form Status Message ===== */
+.form-status {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    min-height: 1.4em;
+}
+.form-status.success { color: #1a7a3c; }
+.form-status.error { color: #c0392b; }

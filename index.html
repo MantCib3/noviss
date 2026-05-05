@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; worker-src 'self' blob:; connect-src 'self' https://challenges.cloudflare.com https://tight-pond-8193.noviss-osint.workers.dev; img-src 'self' data: blob:; frame-src https://challenges.cloudflare.com;">
     <title>NOVISS OSINT | Professional Open Source Intelligence</title>
     <link rel="stylesheet" href="styles.css">
     <script src="pdfjs/pdf.min.js"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -44,7 +46,7 @@
             <h3>Included in a Report</h3>
             <ul class="report-list">
                 <li><strong>Executive Summary</strong> with bottom-line assessment and overall confidence</li>
-                <li><strong>Confidence Ratings</strong> (High / Medium / Low) assigned to every key finding and linkage</li>
+                <li><strong>Confidence Ratings</strong> assigned to every key finding and linkage</li>
                 <li><strong>Source-Based Mapping</strong> of linked profiles, identifiers, and relationships</li>
                 <li><strong>Chronological Activity Timeline</strong> highlighting behavioural patterns and shifts</li>
                 <li><strong>Analytical Findings</strong> based on behavioural, semantic, and network analysis</li>
@@ -215,20 +217,20 @@
             <div class="contact-form-row">
                 <div class="contact-field">
                     <label for="contactName">Full Name</label>
-                    <input type="text" id="contactName" name="name" placeholder="Your name" autocomplete="name" required>
+                    <input type="text" id="contactName" name="name" placeholder="Your name" autocomplete="name" maxlength="100" required>
                 </div>
                 <div class="contact-field">
                     <label for="contactEmail">Email Address</label>
-                    <input type="email" id="contactEmail" name="email" placeholder="your@email.com" autocomplete="email" required>
+                    <input type="email" id="contactEmail" name="email" placeholder="your@email.com" autocomplete="email" maxlength="254" required>
                 </div>
             </div>
             <div class="contact-field">
                 <label for="contactPurpose">Purpose</label>
-                <input type="text" id="contactPurpose" name="purpose" placeholder="Describe the purpose of your investigation request." autocomplete="off" required>
+                <input type="text" id="contactPurpose" name="purpose" placeholder="Describe the purpose of your investigation request." autocomplete="off" maxlength="200" required>
             </div>
             <div class="contact-field">
                 <label for="contactInfo">Investigation Details</label>
-                <textarea id="contactInfo" name="info" rows="5" placeholder="Provide the primary username or handle you'd like investigated. Include any supporting context — platforms they're active on, approximate age, region, or any other relevant public information. The more detail you provide, the more accurate our preliminary assessment will be." required></textarea>
+                <textarea id="contactInfo" name="info" rows="5" maxlength="3000" placeholder="Provide the primary username or handle you'd like investigated. Include any supporting context — platforms they're active on, approximate age, region, or any other relevant public information. The more detail you provide, the more accurate our preliminary assessment will be." required></textarea>
             </div>
             <div class="contact-field">
                 <label class="upload-label" for="contactUpload">
@@ -253,7 +255,9 @@
                     <span>I have read and agree to the <a href="#" data-modal="privacyModal">Privacy Policy</a> and <a href="#" data-modal="termsModal">Terms &amp; Conditions</a></span>
                 </label>
             </div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAADFTcr011fUWBkXS" data-theme="light"></div>
             <button type="submit" class="btn btn-primary contact-submit">Send</button>
+            <div id="formStatus" class="form-status" aria-live="polite"></div>
         </form>
     </section>
 
