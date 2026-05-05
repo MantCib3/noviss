@@ -321,10 +321,12 @@ a.nav-logo {
 }
 
 .report-text h3 {
-    font-size: 1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
     color: var(--primary-color);
     margin-bottom: 1rem;
-    font-weight: 600;
 }
 
 .report-text:hover {
@@ -837,10 +839,12 @@ a.nav-logo {
 }
 
 .step h3 {
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
     margin-bottom: 0.5rem;
     color: var(--primary-color);
-    font-weight: 600;
 }
 
 .step p {
@@ -972,11 +976,10 @@ a.nav-logo {
 }
 
 .sidebar-card-title {
-    font-size: 0.88rem;
-    text-align: left;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    letter-spacing: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
     color: #111;
     width: 100%;
     display: block;
@@ -986,12 +989,12 @@ a.nav-logo {
 
 /* Beats .blog-card h3 (0,1,1) with specificity (0,2,1) */
 .about-blog-right .blog-card h3 {
-    font-size: 0.88rem;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
     color: #111;
     line-height: 1.35;
-    letter-spacing: 0;
     text-align: left;
     padding: 0;
     margin: 0;
@@ -1533,10 +1536,12 @@ a.nav-logo {
 }
 
 .faq-question {
-    font-size: 1.1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
     color: var(--primary-color);
     margin-bottom: 1rem;
-    font-weight: 600;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -2542,7 +2547,10 @@ a.nav-logo {
 }
 
 .step h3 {
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
     margin-bottom: 0.5rem;
     color: var(--primary-color);
 }
@@ -2588,10 +2596,12 @@ a.nav-logo {
 }
 
 .faq-question {
-    font-size: 1.1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
     color: var(--primary-color);
     margin-bottom: 1rem;
-    font-weight: 600;
     cursor: pointer;
 }
 
