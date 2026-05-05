@@ -5,7 +5,7 @@
     "lead": "Digital footprints have transformed what's discoverable through public channels alone.",
     "date": "2026-04",
     "tag": "OSINT",
-    "image": null,
+    "image": "https://images.unsplash.com/photo-1550751827-4bd374173cc4?w=1200&q=80&auto=format&fit=crop",
     "body": [
       "Traditional private investigation relied on physical surveillance, court records, and direct interviews. The shift to documented digital behaviour has fundamentally altered what can be discovered without leaving a desk.",
       "Social platforms, gaming networks, and public forums generate a continuous stream of behavioural data — location check-ins, activity timestamps, communication patterns, and linked accounts. A skilled investigator can map years of digital history from a single starting point.",
@@ -18,7 +18,7 @@
     "lead": "Most people reuse a core handle across dozens of platforms without realising how much it links together.",
     "date": "2026-03",
     "tag": "Digital Identity",
-    "image": null,
+    "image": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1200&q=80&auto=format&fit=crop",
     "body": [
       "Most usernames are not chosen at random. People pick handles they find memorable, meaningful, or aesthetically appealing — and they reuse them. A username that appears on one platform in 2016 often appears, with minor variations, across dozens of others.",
       "Cross-referencing a single handle across social media, gaming networks, forums, and archives frequently surfaces associated email addresses, location data, profile photos, and years of interaction history. Each new connection narrows the picture further.",
@@ -31,7 +31,7 @@
     "lead": "Not all publicly available information is fair game. Here's our ethical framework.",
     "date": "2026-02",
     "tag": "Ethics",
-    "image": null,
+    "image": "https://images.unsplash.com/photo-1589578527966-fdac0f44566c?w=1200&q=80&auto=format&fit=crop",
     "body": [
       "Publicly available information is not a licence to collect everything. The fact that something is technically accessible does not make its use appropriate in every context. Ethical OSINT practice requires constant consideration of purpose, proportionality, and potential harm.",
       "At NOVISS, we don't reproduce private messages, access restricted content, or engage in any form of impersonation. Where light public interaction is used — such as verifying whether a profile is visible to a connected account — it is minimal, targeted, and non-deceptive.",
@@ -44,7 +44,7 @@
     "lead": "Profile photos carry more metadata and linkable context than most people realise.",
     "date": "2026-01",
     "tag": "Techniques",
-    "image": null,
+    "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&q=80&auto=format&fit=crop",
     "body": [
       "A profile photo carries more linkable context than most people expect. Reverse image search tools can surface the same image — or near-identical versions — across platforms the subject may not have considered connected.",
       "Metadata embedded in original image files can include device identifiers, GPS coordinates, and timestamps. While platforms often strip this on upload, original files shared via email, direct messages, or download links may retain it intact.",
@@ -57,7 +57,7 @@
     "lead": "Consistent behavioural patterns, writing style, and timestamps often bridge accounts more reliably than usernames alone.",
     "date": "2025-12",
     "tag": "Techniques",
-    "image": null,
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&auto=format&fit=crop",
     "body": [
       "The most robust way to link accounts across networks isn't a shared username — it's consistent behaviour. Writing style, punctuation patterns, posting times, and topic focus often persist across pseudonymous accounts in ways that usernames don't.",
       "Timestamp overlap is particularly useful. Someone who posts across two accounts at the same unusual hours, reacts to the same events, and references the same locations is likely the same person even if the handles are entirely different.",
@@ -70,7 +70,7 @@
     "lead": "Gaming networks have become one of the richest sources of persistent, cross-linked digital identity.",
     "date": "2025-11",
     "tag": "Gaming OSINT",
-    "image": null,
+    "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=80&auto=format&fit=crop",
     "body": [
       "Gaming networks have become one of the richest sources of persistent digital identity. Steam profiles, Discord servers, Battle.net tags, and Roblox usernames are frequently tied to real names, linked social accounts, friend lists, and years of timestamped activity.",
       "Games with friend list directories or activity feeds allow investigators to map social connections that may not appear anywhere else. A Discord server membership list can link a username to a community — and from there to other members with more visible profiles.",
