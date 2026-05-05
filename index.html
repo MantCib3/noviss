@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; worker-src 'self' blob:; connect-src 'self' https://challenges.cloudflare.com https://tight-pond-8193.noviss-osint.workers.dev; img-src 'self' data: blob: https://images.unsplash.com; frame-src https://challenges.cloudflare.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'sha256-LinDqRW/26kT3UbETGnHBztg91yMTOV6tgdT4PlzaV4=' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; worker-src 'self' blob:; connect-src 'self' https://challenges.cloudflare.com https://tight-pond-8193.noviss-osint.workers.dev; img-src 'self' data: blob: https://images.unsplash.com; frame-src https://challenges.cloudflare.com; form-action 'self' https://tight-pond-8193.noviss-osint.workers.dev; base-uri 'self';">
     <title>NOVISS OSINT | Professional Open Source Intelligence</title>
 
     <!-- SEO Meta Tags -->
@@ -207,7 +207,7 @@
             </div>
         </div>
 
-        <h2 id="pricing-cards" class="how-it-works-heading sm" style="margin-top: 7rem;">Transparent Pricing</h2>
+        <h2 id="pricing-cards" class="how-it-works-heading sm">Transparent Pricing</h2>
         <p class="section-intro">We use a custom quote system based on the actual effort required for your case. A free preliminary review gives you an accurate assessment before any commitment.</p>
         
         <div class="pricing-grid">
@@ -275,9 +275,10 @@
                         <span class="upload-icon">&#8679;</span>
                         <span class="upload-text">Click to upload</span>
                         <span class="upload-sub">PNG, JPG, WEBP</span>
-                        <input type="file" id="contactUpload" name="image" accept="image/png,image/jpeg,image/webp" style="display:none">
+                        <input type="file" id="contactUpload" name="image" accept="image/png,image/jpeg,image/webp" class="file-input-hidden">
                     </label>
                     <span class="upload-filename" id="uploadFilename"></span>
+                    <span class="upload-note">Images cannot be processed via this form &mdash; please describe any relevant image details in the Investigation Details field instead.</span>
                 </div>
                 <div class="contact-field">
                     <label>Identifiers</label>
@@ -382,7 +383,7 @@
     </div><!-- /#main-app -->
 
     <!-- Blog Page -->
-    <div id="blog-page" style="display:none">
+    <div id="blog-page" hidden>
         <div class="blog-page-container">
             <div class="blog-search-bar">
                 <input type="text" id="blogSearch" placeholder="Search articles&#8230;" autocomplete="off">
@@ -392,12 +393,12 @@
                 <button id="blogSearchBtn" class="btn btn-primary">Search</button>
             </div>
             <div id="blogGrid" class="blog-page-grid"></div>
-            <p id="blogNoResults" class="blog-no-results" style="display:none">No articles match your search.</p>
+            <p id="blogNoResults" class="blog-no-results" hidden>No articles match your search.</p>
         </div>
     </div>
 
     <!-- Article Page -->
-    <div id="article-page" style="display:none">
+    <div id="article-page" hidden>
         <div class="article-page-container">
             <button class="article-back-btn" id="articleBackBtn">&#8592; Back to Blog</button>
             <div class="article-header">
@@ -405,7 +406,7 @@
                 <h1 class="article-title" id="articleTitle"></h1>
                 <span class="article-date" id="articleDate"></span>
             </div>
-            <img class="article-image" id="articleImage" src="" alt="" style="display:none">
+            <img class="article-image" id="articleImage" src="" alt="" hidden>
             <div class="article-body" id="articleBody"></div>
             <div class="related-posts" id="relatedPosts"></div>
         </div>

@@ -509,6 +509,22 @@ a.nav-logo {
 }
 
 /* ===== Pricing Section ===== */
+#pricing-cards {
+    margin-top: 7rem;
+}
+
+.file-input-hidden {
+    display: none;
+}
+
+.upload-note {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    color: #888;
+    line-height: 1.4;
+}
+
 .pricing-section {
     padding: 5rem 2rem;
     margin: 3rem 0;

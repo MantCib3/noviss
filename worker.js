@@ -37,6 +37,26 @@ export default {
             return respond({ ok: false, error: 'Method not allowed.' }, 405, corsHeaders);
         }
 
+        // ── 0. Rate limiting (requires KV namespace bound as RATE_LIMITER) ─────────
+        // In the Cloudflare dashboard: Workers & Pages → your Worker → Settings →
+        // Variables → KV Namespace Bindings → add binding name "RATE_LIMITER".
+        if (env.RATE_LIMITER) {
+            const ip = request.headers.get('CF-Connecting-IP') ?? 'unknown';
+            const key = `rl:${ip}`;
+            const windowSec = 3600; // 1-hour sliding window
+            const limit = 3;        // max submissions per window
+            const raw = await env.RATE_LIMITER.get(key);
+            const count = raw ? parseInt(raw, 10) : 0;
+            if (count >= limit) {
+                return respond(
+                    { ok: false, error: 'Too many requests. Please try again later.' },
+                    429,
+                    corsHeaders
+                );
+            }
+            await env.RATE_LIMITER.put(key, String(count + 1), { expirationTtl: windowSec });
+        }
+
         // Parse form data
         let formData;
         try {
@@ -57,6 +77,7 @@ export default {
             body:    new URLSearchParams({
                 secret:   env.TURNSTILE_SECRET_KEY,
                 response: turnstileToken,
+                remoteip: request.headers.get('CF-Connecting-IP') ?? '',
             }),
         });
         const tsData = await tsRes.json();
@@ -130,7 +151,8 @@ export default {
 
 function sanitise(value, maxLen) {
     if (!value) return '';
-    return String(value).trim().slice(0, maxLen);
+    // Strip non-printable control characters (keep tab and newline)
+    return String(value).replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, '').trim().slice(0, maxLen);
 }
 
 function respond(data, status, headers) {
