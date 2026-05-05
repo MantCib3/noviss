@@ -480,80 +480,50 @@ serviceCards.forEach((card, index) => {
 
 // ===== Blog Page =====
 (function () {
-    const BLOG_POSTS = [
-        {
-            id: 1,
-            title: 'How Open Source Intelligence Has Changed Private Investigations',
-            lead: "Digital footprints have transformed what's discoverable through public channels alone.",
-            date: '2026-04',
-            tag: 'OSINT',
-            body: [
-                "Traditional private investigation relied on physical surveillance, court records, and direct interviews. The shift to documented digital behaviour has fundamentally altered what can be discovered without leaving a desk.",
-                "Social platforms, gaming networks, and public forums generate a continuous stream of behavioural data — location check-ins, activity timestamps, communication patterns, and linked accounts. A skilled investigator can map years of digital history from a single starting point.",
-                "The change isn't just in volume. It's in permanence. Old posts, deleted accounts, and cached pages form an archive that physical surveillance never could. OSINT has raised the baseline of what a thorough investigation looks like."
-            ]
-        },
-        {
-            id: 2,
-            title: 'What Your Username Reveals About You',
-            lead: "Most people reuse a core handle across dozens of platforms without realising how much it links together.",
-            date: '2026-03',
-            tag: 'Digital Identity',
-            body: [
-                "Most usernames are not chosen at random. People pick handles they find memorable, meaningful, or aesthetically appealing — and they reuse them. A username that appears on one platform in 2016 often appears, with minor variations, across dozens of others.",
-                "Cross-referencing a single handle across social media, gaming networks, forums, and archives frequently surfaces associated email addresses, location data, profile photos, and years of interaction history. Each new connection narrows the picture further.",
-                "Variations matter too. Suffixes like numbers or underscores follow predictable patterns. Investigators familiar with common handle conventions can systematically search derivatives, dramatically expanding what a single starting username can yield."
-            ]
-        },
-        {
-            id: 3,
-            title: 'The Ethical Boundaries of OSINT: Where We Draw the Line',
-            lead: "Not all publicly available information is fair game. Here's our ethical framework.",
-            date: '2026-02',
-            tag: 'Ethics',
-            body: [
-                "Publicly available information is not a licence to collect everything. The fact that something is technically accessible does not make its use appropriate in every context. Ethical OSINT practice requires constant consideration of purpose, proportionality, and potential harm.",
-                "At NOVISS, we don't reproduce private messages, access restricted content, or engage in any form of impersonation. Where light public interaction is used — such as verifying whether a profile is visible to a connected account — it is minimal, targeted, and non-deceptive.",
-                "We also decline engagements where the stated or inferred purpose suggests harassment, surveillance of a protected person, or any use inconsistent with Australian law. A refusal at intake is sometimes the most appropriate outcome."
-            ]
-        },
-        {
-            id: 4,
-            title: 'Image Reverse Search: What It Can and Cannot Tell You',
-            lead: 'Profile photos carry more metadata and linkable context than most people realise.',
-            date: '2026-01',
-            tag: 'Techniques',
-            body: [
-                "A profile photo carries more linkable context than most people expect. Reverse image search tools can surface the same image — or near-identical versions — across platforms the subject may not have considered connected.",
-                "Metadata embedded in original image files can include device identifiers, GPS coordinates, and timestamps. While platforms often strip this on upload, original files shared via email, direct messages, or download links may retain it intact.",
-                "The practical limit is image uniqueness. Stock photos or heavily cropped images reduce linkability significantly. But a distinctive profile photo used consistently across accounts remains one of the more reliable cross-platform identity signals available."
-            ]
-        },
-        {
-            id: 5,
-            title: 'Cross-Platform Correlation: Linking Accounts Across Networks',
-            lead: 'Consistent behavioural patterns, writing style, and timestamps often bridge accounts more reliably than usernames alone.',
-            date: '2025-12',
-            tag: 'Techniques',
-            body: [
-                "The most robust way to link accounts across networks isn't a shared username — it's consistent behaviour. Writing style, punctuation patterns, posting times, and topic focus often persist across pseudonymous accounts in ways that usernames don't.",
-                "Timestamp overlap is particularly useful. Someone who posts across two accounts at the same unusual hours, reacts to the same events, and references the same locations is likely the same person even if the handles are entirely different.",
-                "Network mapping — identifying shared followers, mutual connections, or co-mentions — adds structural confirmation. A graph of interactions across platforms can reveal clusters that point to a common identity, especially when combined with content-level signals."
-            ]
-        },
-        {
-            id: 6,
-            title: 'Reading Gaming Profiles: Steam, Discord, and Beyond',
-            lead: 'Gaming networks have become one of the richest sources of persistent, cross-linked digital identity.',
-            date: '2025-11',
-            tag: 'Gaming OSINT',
-            body: [
-                "Gaming networks have become one of the richest sources of persistent digital identity. Steam profiles, Discord servers, Battle.net tags, and Roblox usernames are frequently tied to real names, linked social accounts, friend lists, and years of timestamped activity.",
-                "Games with friend list directories or activity feeds allow investigators to map social connections that may not appear anywhere else. A Discord server membership list can link a username to a community — and from there to other members with more visible profiles.",
-                "Gaming handles are also heavily reused. Many players establish a main tag early and carry it forward across every platform they join. This makes gaming-origin handles among the most stable cross-platform identifiers available."
-            ]
-        }
-    ];
+    let BLOG_POSTS = [];
+
+    // Load posts from JSON DB
+    fetch('posts.json')
+        .then(r => r.json())
+        .then(posts => {
+            BLOG_POSTS = posts;
+            populateSidebarCards(BLOG_POSTS.slice(0, 3));
+            // If blog page is already open (unlikely), refresh it
+            const blogPage = document.getElementById('blog-page');
+            if (blogPage && blogPage.style.display !== 'none') {
+                populateDateFilter();
+                renderPosts(BLOG_POSTS);
+            }
+        })
+        .catch(() => console.warn('posts.json could not be loaded'));
+
+    function populateSidebarCards(posts) {
+        const container = document.querySelector('.about-blog-right');
+        if (!container) return;
+        container.querySelectorAll('.blog-card').forEach(c => c.remove());
+        posts.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'blog-card';
+            card.dataset.articleId = p.id;
+            const content = document.createElement('div');
+            content.className = 'blog-card-content';
+            const title = document.createElement('h3');
+            title.className = 'sidebar-card-title';
+            title.style.textAlign = 'left';
+            title.textContent = p.title;
+            const lead = document.createElement('p');
+            lead.className = 'blog-card-lead';
+            lead.textContent = p.lead;
+            const meta = document.createElement('span');
+            meta.className = 'blog-card-meta';
+            meta.textContent = fmtDate(p.date);
+            content.appendChild(title);
+            content.appendChild(lead);
+            content.appendChild(meta);
+            card.appendChild(content);
+            container.appendChild(card);
+        });
+    }
 
     const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
@@ -599,7 +569,9 @@ serviceCards.forEach((card, index) => {
 
     function populateDateFilter() {
         const sel = document.getElementById('blogDateFilter');
-        if (!sel || sel.options.length > 1) return;
+        if (!sel) return;
+        // Reset to just the default option before repopulating
+        sel.innerHTML = '<option value="">All dates</option>';
         const seen = new Set();
         BLOG_POSTS.forEach(p => {
             if (!seen.has(p.date)) {
@@ -658,6 +630,16 @@ serviceCards.forEach((card, index) => {
         document.getElementById('articleTag').textContent = post.tag;
         document.getElementById('articleTitle').textContent = post.title;
         document.getElementById('articleDate').textContent = fmtDate(post.date);
+        const imgEl = document.getElementById('articleImage');
+        if (imgEl) {
+            if (post.image) {
+                imgEl.src = post.image;
+                imgEl.alt = post.title;
+                imgEl.style.display = '';
+            } else {
+                imgEl.style.display = 'none';
+            }
+        }
         const bodyEl = document.getElementById('articleBody');
         bodyEl.innerHTML = '';
         post.body.forEach(para => {
