@@ -1237,11 +1237,7 @@ a.nav-logo {
     margin-bottom: 1.5rem;
 }
 
-.related-posts-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
-}
+.related-posts-grid {\n    display: grid;\n    grid-template-columns: repeat(3, 1fr);\n    gap: 1.2rem;\n}\n\n.related-posts-grid .blog-page-card {\n    padding: 1.1rem 1.2rem;\n    gap: 0.3rem;\n}\n\n.related-posts-grid .blog-page-card-lead {\n    display: none;\n}
 
 /* Strip the card-box styling from .about-content when used in the sidebar */
 .about-blog-left .about-content {
