@@ -302,12 +302,12 @@ a.nav-logo {
 }
 
 .report-text {
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
+    background: #fff;
+    border: 1.5px solid #e8e8e8;
     padding: 1.8rem 2rem;
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
-    transition: all var(--transition);
+    border-radius: 14px;
+    box-shadow: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     align-self: center;
 }
 
@@ -319,9 +319,10 @@ a.nav-logo {
 }
 
 .report-text:hover {
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px);
+    background: #fff;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    border-color: #ccc;
+    transform: translateY(-3px);
 }
 
 .report-text p {
@@ -520,41 +521,42 @@ a.nav-logo {
 }
 
 .pricing-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
+    background: #fff;
+    border: 1.5px solid #e8e8e8;
     padding: 2.5rem;
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
-    transition: all var(--transition);
+    border-radius: 14px;
+    box-shadow: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     position: relative;
 }
 
 .pricing-card.featured {
-    background: rgba(255, 255, 255, 0.95);
-    transform: scale(1.05);
-    box-shadow: 0 12px 40px rgba(0, 102, 204, 0.15);
+    background: #fff;
+    border-color: #111;
 }
 
 .featured-badge {
     position: absolute;
     top: -12px;
     left: 20px;
-    background: linear-gradient(135deg, var(--accent-color), #0052a3);
+    background: #111;
     color: white;
     padding: 0.5rem 1.2rem;
     border-radius: 25px;
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     font-weight: 700;
-    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+    letter-spacing: 0.08em;
 }
 
 .pricing-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0, 102, 204, 0.12);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    border-color: #ccc;
 }
 
 .pricing-card.featured:hover {
-    transform: scale(1.05) translateY(-8px);
+    transform: translateY(-3px);
+    border-color: #111;
 }
 
 .pricing-card h3 {
@@ -783,14 +785,15 @@ a.nav-logo {
 }
 
 .step {
-    background: var(--card-bg);
-    backdrop-filter: blur(8px);
+    background: #fff;
+    border: 1.5px solid #e8e8e8;
     padding: 2rem;
-    border-radius: 16px;
+    border-radius: 14px;
     text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    transition: all var(--transition);
+    box-shadow: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     position: relative;
+    overflow: hidden;
 }
 
 .step::before {
@@ -799,17 +802,18 @@ a.nav-logo {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--accent-color), #0052a3);
-    border-radius: 16px 16px 0 0;
+    height: 3px;
+    background: #111;
+    border-radius: 14px 14px 0 0;
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform var(--transition);
+    transition: transform 0.2s ease;
 }
 
 .step:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0, 102, 204, 0.12);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    border-color: #ccc;
 }
 
 .step:hover::before {
@@ -819,7 +823,7 @@ a.nav-logo {
 .step-number {
     font-size: 3rem;
     font-weight: 700;
-    color: var(--accent-color);
+    color: #e0e0e0;
     margin-bottom: 0.5rem;
 }
 
@@ -1503,19 +1507,20 @@ a.nav-logo {
 }
 
 .faq-item {
-    background: var(--card-bg);
-    backdrop-filter: blur(8px);
+    background: #fff;
+    border: 1.5px solid #e8e8e8;
     padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    transition: all var(--transition);
+    border-radius: 14px;
+    box-shadow: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     cursor: pointer;
 }
 
 .faq-item:hover {
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-    transform: translateY(-5px);
+    background: #fff;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    border-color: #ccc;
+    transform: translateY(-3px);
 }
 
 .faq-question {
