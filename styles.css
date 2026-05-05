@@ -55,7 +55,7 @@ body::before {
     right: 0;
     bottom: 0;
     opacity: 0.12;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><style>@keyframes wave{0%{transform:translateX(0)} 100%{transform:translateX(100px)}}</style></defs><path d="M0,400 Q300,300 600,400 T1200,400 L1200,800 L0,800 Z" fill="%23000000" opacity="0.5" style="animation: wave 15s ease-in-out infinite"/><path d="M0,500 Q300,400 600,500 T1200,500 L1200,800 L0,800 Z" fill="%23000000" opacity="0.3" style="animation: wave 20s ease-in-out infinite reverse"/></svg>');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><style>@keyframes wave{0%,100%{transform:translateX(0)} 50%{transform:translateX(100px)}}</style></defs><path d="M0,400 Q300,300 600,400 T1200,400 L1200,800 L0,800 Z" fill="%23000000" opacity="0.5" style="animation: wave 15s ease-in-out infinite"/><path d="M0,500 Q300,400 600,500 T1200,500 L1200,800 L0,800 Z" fill="%23000000" opacity="0.3" style="animation: wave 20s ease-in-out infinite reverse"/></svg>');
     background-size: 200% 100%;
     background-position: 0 bottom;
     background-repeat: repeat-x;
@@ -304,17 +304,17 @@ a.nav-logo {
 .report-text {
     background: var(--card-bg);
     backdrop-filter: blur(10px);
-    padding: 1.4rem 1.5rem;
+    padding: 1.8rem 2rem;
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
     transition: all var(--transition);
-    align-self: start;
+    align-self: center;
 }
 
 .report-text h3 {
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: var(--primary-color);
-    margin-bottom: 0.85rem;
+    margin-bottom: 1rem;
     font-weight: 600;
 }
 
@@ -337,12 +337,12 @@ a.nav-logo {
 }
 
 .report-list li {
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     color: #666;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.4rem;
     padding-left: 1.4rem;
     position: relative;
-    line-height: 1.45;
+    line-height: 1.5;
 }
 
 .report-list li:before {
@@ -1422,8 +1422,13 @@ a.nav-logo {
     color: #111;
 }
 
+.turnstile-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
 .contact-submit {
-    align-self: center;
     padding: 0.75rem 2.2rem;
     font-size: 0.9rem;
     letter-spacing: 0.08em;
