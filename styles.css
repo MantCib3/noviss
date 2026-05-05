@@ -1422,13 +1422,15 @@ a.nav-logo {
     color: #111;
 }
 
-.turnstile-row {
+.cf-turnstile {
     display: flex;
-    align-items: center;
-    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
 
 .contact-submit {
+    display: block;
+    margin: 0 auto;
     padding: 0.75rem 2.2rem;
     font-size: 0.9rem;
     letter-spacing: 0.08em;
