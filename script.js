@@ -138,7 +138,9 @@
     });
 
     // Known Identifiers — dynamic add/remove
-    document.getElementById('addIdentifierBtn').addEventListener('click', function() {
+    const addIdentifierBtn = document.getElementById('addIdentifierBtn');
+
+    function addIdentifierRow() {
         const list = document.getElementById('identifiersList');
         const row = document.createElement('div');
         row.className = 'identifier-row';
@@ -164,7 +166,10 @@
         row.appendChild(platformInput);
         row.appendChild(removeBtn);
         list.appendChild(row);
-    });
+    }
+
+    addIdentifierBtn.addEventListener('click', addIdentifierRow);
+    addIdentifierRow(); // pre-open one row on load
 
     document.getElementById('contactForm').addEventListener('submit', e => {
         e.preventDefault();
@@ -248,6 +253,7 @@
             if (json.ok) {
                 form.reset();
                 document.getElementById('identifiersList').innerHTML = '';
+                addIdentifierRow();
                 document.getElementById('uploadFilename').textContent = '';
                 // Only reset Turnstile on success so it's ready for a fresh submission
                 if (window.turnstile) window.turnstile.reset();
