@@ -107,7 +107,26 @@ export default {
             .map((a, i) => `  • ${a}${platforms[i] ? ' — ' + platforms[i] : ''}`)
             .join('\n');
 
-        // ── 4. Build email body ──────────────────────────────────────────────────
+        // ── 5. Process optional image attachment ─────────────────────────────────
+        const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/webp'];
+        const MAX_BYTES     = 5 * 1024 * 1024; // 5 MB
+        let attachment = null;
+        const imageFile = formData.get('image');
+        if (imageFile && imageFile.size > 0) {
+            if (!ALLOWED_TYPES.includes(imageFile.type)) {
+                return respond({ ok: false, error: 'Only PNG, JPG, and WEBP images are accepted.' }, 400, corsHeaders);
+            }
+            if (imageFile.size > MAX_BYTES) {
+                return respond({ ok: false, error: 'Image must be under 5 MB.' }, 400, corsHeaders);
+            }
+            const buf    = await imageFile.arrayBuffer();
+            const b64    = btoa(String.fromCharCode(...new Uint8Array(buf)));
+            const ext    = imageFile.type.split('/')[1].replace('jpeg', 'jpg');
+            const safeFilename = sanitise(imageFile.name, 100).replace(/[^a-zA-Z0-9._-]/g, '_') || `image.${ext}`;
+            attachment = { filename: safeFilename, content: b64 };
+        }
+
+        // ── 5. Build email body ──────────────────────────────────────────────────
         const emailBody = [
             `Name:    ${name}`,
             `Email:   ${email}`,
@@ -118,21 +137,24 @@ export default {
             identifierLines ? `\nKnown Identifiers:\n${identifierLines}` : '',
         ].join('\n').trim();
 
-        // ── 5. Send via Resend ───────────────────────────────────────────────────
+        // ── 6. Send via Resend ───────────────────────────────────────────────────
         // TODO: replace "onboarding@resend.dev" with your verified domain address
+        const resendPayload = {
+            from:     'NOVISS Contact Form <onboarding@resend.dev>',
+            to:       [env.TO_EMAIL],
+            reply_to: email,
+            subject:  `New Enquiry — ${name}`,
+            text:     emailBody,
+        };
+        if (attachment) resendPayload.attachments = [attachment];
+
         const resendRes = await fetch(RESEND_SEND_URL, {
             method:  'POST',
             headers: {
                 'Content-Type':  'application/json',
                 'Authorization': `Bearer ${env.RESEND_API_KEY}`,
             },
-            body: JSON.stringify({
-                from:     'NOVISS Contact Form <onboarding@resend.dev>',
-                to:       [env.TO_EMAIL],
-                reply_to: email,
-                subject:  `New Enquiry — ${name}`,
-                text:     emailBody,
-            }),
+            body: JSON.stringify(resendPayload),
         });
 
         if (!resendRes.ok) {

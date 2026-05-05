@@ -1375,11 +1375,10 @@ a.nav-logo {
     gap: 0.3rem;
     border: 1.5px dashed #ccc;
     border-radius: 10px;
-    padding: 0.5rem;
+    padding: 0.75rem 0.5rem;
     cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
     text-align: center;
-    aspect-ratio: 1;
     width: 100%;
 }
 
