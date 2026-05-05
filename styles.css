@@ -1220,6 +1220,29 @@ a.nav-logo {
     margin-bottom: 1.6rem;
 }
 
+/* ===== Related Posts ===== */
+.related-posts {
+    max-width: 720px;
+    margin: 4rem auto 0;
+    padding-top: 3rem;
+    border-top: 1px solid #e8e8e8;
+}
+
+.related-posts-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.related-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+}
+
 /* Strip the card-box styling from .about-content when used in the sidebar */
 .about-blog-left .about-content {
     background: none;

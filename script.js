@@ -648,6 +648,46 @@ serviceCards.forEach((card, index) => {
             p.textContent = para;
             bodyEl.appendChild(p);
         });
+
+        // Related posts: same tag first, then others, max 6
+        const related = [
+            ...BLOG_POSTS.filter(p => p.id !== id && p.tag === post.tag),
+            ...BLOG_POSTS.filter(p => p.id !== id && p.tag !== post.tag)
+        ].slice(0, 6);
+        const relatedEl = document.getElementById('relatedPosts');
+        relatedEl.innerHTML = '';
+        if (related.length) {
+            const heading = document.createElement('h2');
+            heading.className = 'related-posts-heading';
+            heading.textContent = 'Related Posts';
+            relatedEl.appendChild(heading);
+            const grid = document.createElement('div');
+            grid.className = 'related-posts-grid';
+            related.forEach(rp => {
+                const card = document.createElement('div');
+                card.className = 'blog-page-card';
+                card.dataset.id = rp.id;
+                const tag = document.createElement('span');
+                tag.className = 'blog-page-card-tag';
+                tag.textContent = rp.tag;
+                const title = document.createElement('h3');
+                title.className = 'blog-page-card-title';
+                title.textContent = rp.title;
+                const lead = document.createElement('p');
+                lead.className = 'blog-page-card-lead';
+                lead.textContent = rp.lead;
+                const meta = document.createElement('span');
+                meta.className = 'blog-page-card-meta';
+                meta.textContent = fmtDate(rp.date);
+                card.appendChild(tag);
+                card.appendChild(title);
+                card.appendChild(lead);
+                card.appendChild(meta);
+                card.addEventListener('click', () => showArticle(rp.id, _articleOrigin));
+                grid.appendChild(card);
+            });
+            relatedEl.appendChild(grid);
+        }
         if (blogPage) blogPage.style.display = 'none';
         articlePage.style.display = '';
         articlePage.style.animation = 'none';
