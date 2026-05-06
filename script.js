@@ -281,12 +281,31 @@
 })();
 
 // ===== FAQ Toggle =====
-const faqItems = document.querySelectorAll('.faq-item');
-faqItems.forEach(item => {
-    item.addEventListener('click', function() {
-        item.classList.toggle('active');
-    });
-});
+(function () {
+    function initFAQ() {
+        const faqItems = document.querySelectorAll('.faq-item');
+        if (!faqItems.length) return;
+
+        // Measure each card's rendered closed height and set all to the tallest,
+        // so every card is identical in size before being opened.
+        let closedH = 0;
+        faqItems.forEach(item => { closedH = Math.max(closedH, item.offsetHeight); });
+        faqItems.forEach(item => { item.style.minHeight = closedH + 'px'; });
+
+        faqItems.forEach(item => {
+            item.addEventListener('click', function () {
+                item.classList.toggle('active');
+            });
+        });
+    }
+
+    // Wait for fonts so Bebas Neue is rendered before measuring heights.
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(initFAQ);
+    } else {
+        initFAQ();
+    }
+})();
 
 // ===== Mobile Menu Toggle =====
 const hamburger = document.querySelector('.hamburger');
