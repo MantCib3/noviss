@@ -691,6 +691,8 @@ serviceCards.forEach((card, index) => {
             });
             relatedEl.appendChild(grid);
         }
+        const mainApp = document.getElementById('main-app');
+        if (mainApp) mainApp.hidden = true;
         if (blogPage) blogPage.hidden = true;
         articlePage.hidden = false;
         articlePage.style.animation = 'none';
