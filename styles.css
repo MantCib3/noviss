@@ -17,8 +17,6 @@ section.fade-in {
     animation: fadeInUp 0.6s ease-out forwards;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&family=Bebas+Neue&display=swap');
-
 :root {
     --primary-color: #000;
     --secondary-color: #fff;
@@ -1250,6 +1248,11 @@ a.nav-logo {
 .article-share-btn.copied {
     color: #111;
     border-color: #999;
+}
+.pdf-fallback {
+    color: #999;
+    text-align: center;
+    padding: 2rem;
 }
 .article-image {
     display: block;

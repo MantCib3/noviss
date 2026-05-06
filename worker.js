@@ -20,7 +20,7 @@ const RESEND_SEND_URL      = 'https://api.resend.com/emails';
 
 export default {
     async fetch(request, env) {
-        const allowedOrigin = env.ALLOWED_ORIGIN || '*';
+        const allowedOrigin = env.ALLOWED_ORIGIN || '';
 
         const corsHeaders = {
             'Access-Control-Allow-Origin':  allowedOrigin,
@@ -107,7 +107,7 @@ export default {
             .map((a, i) => `  • ${a}${platforms[i] ? ' — ' + platforms[i] : ''}`)
             .join('\n');
 
-        // ── 5. Process optional image attachment ─────────────────────────────────
+        // ── 4. Process optional image attachment ─────────────────────────────────
         const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/webp'];
         const MAX_BYTES     = 5 * 1024 * 1024; // 5 MB
         let attachment = null;
@@ -120,13 +120,19 @@ export default {
                 return respond({ ok: false, error: 'Image must be under 5 MB.' }, 400, corsHeaders);
             }
             const buf    = await imageFile.arrayBuffer();
-            const b64    = btoa(String.fromCharCode(...new Uint8Array(buf)));
+            const bytes  = new Uint8Array(buf);
+            let b64 = '';
+            const CHUNK = 8192;
+            for (let i = 0; i < bytes.length; i += CHUNK) {
+                b64 += String.fromCharCode(...bytes.subarray(i, i + CHUNK));
+            }
+            b64 = btoa(b64);
             const ext    = imageFile.type.split('/')[1].replace('jpeg', 'jpg');
             const safeFilename = sanitise(imageFile.name, 100).replace(/[^a-zA-Z0-9._-]/g, '_') || `image.${ext}`;
             attachment = { filename: safeFilename, content: b64 };
         }
 
-        // ── 5. Build email body ──────────────────────────────────────────────────
+        // ── 5. Build email body ─────────────────────────────────────────────────
         const emailBody = [
             `Name:    ${name}`,
             `Email:   ${email}`,
@@ -137,7 +143,7 @@ export default {
             identifierLines ? `\nKnown Identifiers:\n${identifierLines}` : '',
         ].join('\n').trim();
 
-        // ── 6. Send via Resend ───────────────────────────────────────────────────
+        // ── 6. Send via Resend ──────────────────────────────────────────────────
         // TODO: replace "onboarding@resend.dev" with your verified domain address
         const resendPayload = {
             from:     'NOVISS Contact Form <onboarding@resend.dev>',

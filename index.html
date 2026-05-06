@@ -11,13 +11,14 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <link rel="canonical" href="https://noviss-osint.com/">
     <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://noviss-osint.com/">
     <meta property="og:title" content="NOVISS OSINT | Professional Open Source Intelligence">
     <meta property="og:description" content="Professional open source intelligence investigations from AU$70. Map any individual's complete public digital footprint with confidence-rated analysis and a free preliminary assessment.">
-    <meta property="og:image" content="https://noviss-osint.com/og-image.jpg">
+    <meta property="og:image" content="https://noviss-osint.com/og-image.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="NOVISS OSINT - Professional Open Source Intelligence">
@@ -29,7 +30,7 @@
     <meta name="twitter:url" content="https://noviss-osint.com/">
     <meta name="twitter:title" content="NOVISS OSINT | Professional Open Source Intelligence">
     <meta name="twitter:description" content="Professional open source intelligence investigations from AU$70. Map any individual's complete public digital footprint with confidence-rated analysis and a free preliminary assessment.">
-    <meta name="twitter:image" content="https://noviss-osint.com/og-image.jpg">
+    <meta name="twitter:image" content="https://noviss-osint.com/og-image.svg">
     <meta name="twitter:image:alt" content="NOVISS OSINT - Professional Open Source Intelligence">
 
     <!-- Performance: Preconnect -->
@@ -37,6 +38,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://challenges.cloudflare.com">
     <link rel="dns-prefetch" href="https://images.unsplash.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&family=Bebas+Neue&display=swap">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -51,6 +53,10 @@
         "name": "Australia"
       },
       "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "AU"
+      },
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer service",
@@ -252,20 +258,20 @@
         <form class="contact-form" id="contactForm" novalidate>
             <div class="contact-form-row">
                 <div class="contact-field">
-                    <label for="contactName">Name</label>
+                    <label for="contactName">Name*</label>
                     <input type="text" id="contactName" name="name" placeholder="Your name" autocomplete="name" maxlength="100" required>
                 </div>
                 <div class="contact-field">
-                    <label for="contactEmail">Email Address</label>
+                    <label for="contactEmail">Email Address*</label>
                     <input type="email" id="contactEmail" name="email" placeholder="your@email.com" autocomplete="email" maxlength="254" required>
                 </div>
             </div>
             <div class="contact-field">
-                <label for="contactPurpose">Purpose</label>
+                <label for="contactPurpose">Purpose*</label>
                 <input type="text" id="contactPurpose" name="purpose" placeholder="Describe the purpose of your investigation request." autocomplete="off" maxlength="200" required>
             </div>
             <div class="contact-field">
-                <label for="contactInfo">Investigation Details</label>
+                <label for="contactInfo">Investigation Details*</label>
                 <textarea id="contactInfo" name="info" rows="5" maxlength="3000" placeholder="Provide the primary username or handle you'd like investigated. Include any supporting context — platforms they're active on, approximate age, region, or any other relevant public information. The more detail you provide, the more accurate our preliminary assessment will be." required></textarea>
             </div>
             <div class="contact-image-identifier-row">
@@ -344,7 +350,7 @@
         <div class="footer-container">
             <div class="footer-section">
                 <h3>NOVISS OSINT</h3>
-                <p class="footer-location">Brisbane, Queensland, Australia</p>
+                <p class="footer-location">Queensland, Australia</p>
                 <button class="btn btn-primary footer-btn" data-link="#contact">Start an Investigation</button>
             </div>
             <div class="footer-section">
@@ -374,7 +380,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 NOVISS OSINT. All rights reserved. Brisbane, Australia.</p>
+            <p>&copy; 2025 NOVISS OSINT. All rights reserved. Queensland, Australia.</p>
         </div>
     </footer>
 

@@ -76,8 +76,10 @@
             counter.textContent = `1 / ${doc.numPages}`;
             renderPage(1, null); // no flip on first load
         }).catch(() => {
-            canvas.parentElement.innerHTML =
-                '<p style="color:#999;text-align:center;padding:2rem;">Preview unavailable — open the PDF directly.</p>';
+            const fallback = document.createElement('p');
+            fallback.className = 'pdf-fallback';
+            fallback.textContent = 'Preview unavailable — open the PDF directly.';
+            canvas.parentElement.replaceChildren(fallback);
         });
 
         function goNext() {
@@ -462,30 +464,6 @@ window.addEventListener('scroll', () => {
         navbar.style.boxShadow = 'none';
     }
 });
-
-// ===== Blog Card Click Handler =====
-const blogCards = document.querySelectorAll('.blog-card');
-blogCards.forEach(card => {
-    card.addEventListener('click', function() {
-        // Navigation logic handled by blog page section below
-    });
-});
-
-// ===== Counter Animation =====
-function animateValue(element, start, end, duration) {
-    let startTimestamp = null;
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        element.textContent = Math.floor(progress * (end - start) + start);
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
-    window.requestAnimationFrame(step);
-}
-
-
 
 // ===== Service Card Interaction =====
 const serviceCards = document.querySelectorAll('.service-card');

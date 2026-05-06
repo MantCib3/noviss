@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+
+  <!-- Subtle grid -->
+  <line x1="0" y1="315" x2="1200" y2="315" stroke="#161616" stroke-width="1"/>
+  <line x1="600" y1="0" x2="600" y2="630" stroke="#161616" stroke-width="1"/>
+
+  <!-- Corner marks -->
+  <rect x="80" y="80" width="40" height="3" fill="#2a2a2a"/>
+  <rect x="80" y="80" width="3" height="40" fill="#2a2a2a"/>
+  <rect x="1080" y="80" width="40" height="3" fill="#2a2a2a"/>
+  <rect x="1117" y="80" width="3" height="40" fill="#2a2a2a"/>
+  <rect x="80" y="547" width="40" height="3" fill="#2a2a2a"/>
+  <rect x="80" y="510" width="3" height="40" fill="#2a2a2a"/>
+  <rect x="1080" y="547" width="40" height="3" fill="#2a2a2a"/>
+  <rect x="1117" y="510" width="3" height="40" fill="#2a2a2a"/>
+
+  <!-- NOVISS wordmark -->
+  <text x="600" y="295" font-family="Arial Black, Arial, sans-serif" font-size="110" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="18">NOVISS</text>
+
+  <!-- Divider -->
+  <rect x="520" y="320" width="160" height="2" fill="#333333"/>
+
+  <!-- OSINT label -->
+  <text x="600" y="375" font-family="Arial, sans-serif" font-size="28" font-weight="400" fill="#666666" text-anchor="middle" letter-spacing="14">OSINT</text>
+
+  <!-- Tagline -->
+  <text x="600" y="450" font-family="Arial, sans-serif" font-size="19" font-weight="300" fill="#444444" text-anchor="middle" letter-spacing="2">Professional Open Source Intelligence</text>
+
+  <!-- Domain -->
+  <text x="600" y="530" font-family="Arial, sans-serif" font-size="15" fill="#2e2e2e" text-anchor="middle" letter-spacing="1">noviss-osint.com</text>
+</svg>
