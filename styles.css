@@ -1214,11 +1214,42 @@ a.nav-logo {
     letter-spacing: 0.04em;
     margin: 0 0 0.85rem;
 }
+.article-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
 .article-date {
     display: block;
     font-size: 0.82rem;
     color: #bbb;
     font-family: 'Inter', sans-serif;
+}
+.article-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: none;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 0.28rem 0.65rem;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #bbb;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.article-share-btn:hover,
+.article-share-btn.copied {
+    color: #111;
+    border-color: #999;
 }
 .article-image {
     display: block;
@@ -1560,7 +1591,7 @@ a.nav-logo {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
-    align-items: start;
+    align-items: stretch;
 }
 
 .faq-item {
@@ -1571,6 +1602,8 @@ a.nav-logo {
     box-shadow: none;
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
 .faq-item:hover {

@@ -328,6 +328,7 @@ if (navLogo) {
             if (articlePage && !articlePage.hidden) articlePage.hidden = true;
             mainApp.hidden = false;
         }
+        history.pushState({ page: 'main' }, '', location.pathname);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
@@ -387,9 +388,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const articlePage = document.getElementById('article-page');
         const mainApp = document.getElementById('main-app');
         if (mainApp) {
+            const wasAway = (blogPage && !blogPage.hidden) || (articlePage && !articlePage.hidden);
             if (blogPage && !blogPage.hidden) blogPage.hidden = true;
             if (articlePage && !articlePage.hidden) articlePage.hidden = true;
             mainApp.hidden = false;
+            if (wasAway) history.pushState({ page: 'main' }, '', location.pathname);
         }
         try {
             const target = document.querySelector(href);
@@ -489,6 +492,7 @@ serviceCards.forEach((card, index) => {
         .then(posts => {
             BLOG_POSTS = posts;
             populateSidebarCards(BLOG_POSTS.slice(0, 3));
+            routeInitial();
             // If blog page is already open (unlikely), refresh it
             const blogPage = document.getElementById('blog-page');
             if (blogPage && !blogPage.hidden) {
@@ -599,11 +603,12 @@ serviceCards.forEach((card, index) => {
         renderPosts(results);
     }
 
-    function showBlogPage() {
+    function showBlogPage(addHistory = true) {
         const mainApp = document.getElementById('main-app');
         const blogPage = document.getElementById('blog-page');
         const articlePage = document.getElementById('article-page');
         if (!mainApp || !blogPage) return;
+        if (addHistory) history.pushState({ page: 'blog' }, '', '#blog');
         mainApp.hidden = true;
         if (articlePage) articlePage.hidden = true;
         blogPage.hidden = false;
@@ -621,10 +626,11 @@ serviceCards.forEach((card, index) => {
 
     let _articleOrigin = 'blog'; // 'blog' or 'main'
 
-    function showArticle(id, origin) {
+    function showArticle(id, origin, addHistory = true) {
         const post = BLOG_POSTS.find(p => p.id === id);
         if (!post) return;
         _articleOrigin = origin || 'blog';
+        if (addHistory) history.pushState({ page: 'article', slug: post.slug }, '', '#article/' + post.slug);
         const blogPage = document.getElementById('blog-page');
         const articlePage = document.getElementById('article-page');
         if (!articlePage) return;
@@ -752,6 +758,7 @@ serviceCards.forEach((card, index) => {
             if (_articleOrigin === 'main') {
                 const mainApp = document.getElementById('main-app');
                 if (mainApp) { mainApp.hidden = false; window.scrollTo({ top: 0 }); }
+                history.pushState({ page: 'main' }, '', location.pathname);
             } else {
                 showBlogPage();
             }
@@ -771,6 +778,54 @@ serviceCards.forEach((card, index) => {
             }
         });
     }
+
+    // Share button — copies current URL (with article hash) to clipboard
+    const articleShareBtn = document.getElementById('articleShareBtn');
+    const articleShareLabel = document.getElementById('articleShareLabel');
+    if (articleShareBtn && articleShareLabel) {
+        articleShareBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(location.href).then(() => {
+                articleShareLabel.textContent = 'Copied!';
+                articleShareBtn.classList.add('copied');
+                setTimeout(() => {
+                    articleShareLabel.textContent = 'Copy link';
+                    articleShareBtn.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {});
+        });
+    }
+
+    // Hash-based routing — called after BLOG_POSTS are loaded
+    function routeInitial() {
+        const h = location.hash;
+        if (h.startsWith('#article/')) {
+            const slug = h.slice(9);
+            const post = BLOG_POSTS.find(p => p.slug === slug);
+            if (post) showArticle(post.id, 'blog', false);
+        } else if (h === '#blog') {
+            showBlogPage(false);
+        }
+    }
+
+    // Browser back / forward support
+    window.addEventListener('popstate', () => {
+        const h = location.hash;
+        if (h.startsWith('#article/')) {
+            const slug = h.slice(9);
+            const post = BLOG_POSTS.find(p => p.slug === slug);
+            if (post) showArticle(post.id, 'blog', false);
+            else showBlogPage(false);
+        } else if (h === '#blog') {
+            showBlogPage(false);
+        } else {
+            const mainApp = document.getElementById('main-app');
+            const bPage  = document.getElementById('blog-page');
+            const aPage  = document.getElementById('article-page');
+            if (bPage)   bPage.hidden   = true;
+            if (aPage)   aPage.hidden   = true;
+            if (mainApp) mainApp.hidden = false;
+        }
+    });
 })();
 
 // ===== Turnstile Error Callback =====
